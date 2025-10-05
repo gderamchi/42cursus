@@ -6,11 +6,53 @@
 /*   By: guillaume_deramchi <guillaume_deramchi@    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/05 15:28:19 by guillaume_d       #+#    #+#             */
-/*   Updated: 2025/10/05 15:28:54 by guillaume_d      ###   ########.fr       */
+/*   Updated: 2025/10/05 16:54:29 by guillaume_d      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-void	*memcpy(void *restrict dst, const void *restrict src, unsigned int n)
+void	*ft_memcpy(void *restrict dst, const void *restrict src, unsigned int n)
 {
-	
+	unsigned char	*ptr;
+	unsigned char	*ptr2;
+	int				i;
+
+	i = 0;
+	ptr = (unsigned char *)dst;
+	ptr2 = (unsigned char *)src;
+
+	while (i < n)
+	{
+		ptr[i] = ptr2[i];
+		i++;
+	}
+	return (dst);
 }
+
+// #include <stdio.h>
+// #include <stdlib.h>
+// #include <string.h>
+
+// int	main(void)
+// {
+// 	int				array[] = {54, 85, 20, 63, 21};
+// 	int				array2[] = {1, 2, 3, 4, 5};
+// 	unsigned int	size;
+// 	int				length;
+
+// 	size = sizeof(int) * 5;
+// 	/* Display the initial values */
+// 	for (length = 0; length < 5; length++)
+// 	{
+// 		printf("%d ", array[length]);
+// 	}
+// 	printf("\n");
+// 	/* Reset the memory bloc */
+// 	ft_memcpy(array, array2, size);
+// 	/* Display the new values */
+// 	for (length = 0; length < 5; length++)
+// 	{
+// 		printf("%d ", array[length]);
+// 	}
+// 	printf("\n");
+// 	return (0);
+// }
