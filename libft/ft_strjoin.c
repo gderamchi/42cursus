@@ -1,26 +1,40 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   libft.h                                            :+:      :+:    :+:   */
+/*   ft_strjoin.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: guillaume_deramchi <guillaume_deramchi@    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/10/04 20:21:55 by guillaume_d       #+#    #+#             */
-/*   Updated: 2025/10/04 23:05:11 by guillaume_d      ###   ########.fr       */
+/*   Created: 2025/10/04 22:51:50 by guillaume_d       #+#    #+#             */
+/*   Updated: 2025/10/04 23:53:37 by guillaume_d      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef LIBFT_H
-# define LIBFT_H
-# include <stdio.h>
-# include <stdlib.h>
-# include <unistd.h>
+#include "libft.h"
+#include <stdio.h>
+#include <stdlib.h>
 
-int		ft_strncmp(char *s1, char *s2, int n);
-int		ft_strlen(char *str);
-char	*ft_strjoin(char **input, char *sep);
-int		ft_strcmp(char *s1, char *s2);
-void	ft_putchar(char c);
-int		ft_atoi(char *str);
+int	ft_strslen(char **strs)
+{
+	int	i;
+	int	j;
 
-#endif
+	i = 0;
+	j = 0;
+	while (strs[i])
+	{
+		while (strs[i][j])
+			j++;
+		i++;
+	}
+	return (j);
+}
+
+char	*ft_strjoin(char **input, char *sep)
+{
+	int	seplen;
+	int	strslen;
+
+	seplen = ft_strlen(sep);
+	strslen = ft_strslen(input);
+}
