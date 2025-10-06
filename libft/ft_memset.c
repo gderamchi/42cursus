@@ -6,13 +6,11 @@
 /*   By: guillaume_deramchi <guillaume_deramchi@    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/05 13:59:05 by guillaume_d       #+#    #+#             */
-/*   Updated: 2025/10/06 14:09:17 by guillaume_d      ###   ########.fr       */
+/*   Updated: 2025/10/06 15:10:31 by guillaume_d      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
+#include "libft.h"
 
 void	*ft_memset(void *b, int c, unsigned int len)
 {

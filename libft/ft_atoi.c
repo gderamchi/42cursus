@@ -6,11 +6,11 @@
 /*   By: guillaume_deramchi <guillaume_deramchi@    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/04 05:23:21 by guillaume_d       #+#    #+#             */
-/*   Updated: 2025/10/04 20:21:21 by guillaume_d      ###   ########.fr       */
+/*   Updated: 2025/10/06 15:11:09 by guillaume_d      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
+#include "libft.h"
 
 int	ft_atoi(char *str)
 {
@@ -39,8 +39,8 @@ int	ft_atoi(char *str)
 	return (res);
 }
 
-int	main(int ac, char **av)
-{
-	printf("%d\n", ft_atoi(av[1]));
-	return (0);
-}
+// int	main(int ac, char **av)
+// {
+// 	printf("%d\n", ft_atoi(av[1]));
+// 	return (0);
+// }

@@ -6,12 +6,13 @@
 /*   By: guillaume_deramchi <guillaume_deramchi@    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/04 20:21:55 by guillaume_d       #+#    #+#             */
-/*   Updated: 2025/10/06 15:08:02 by guillaume_d      ###   ########.fr       */
+/*   Updated: 2025/10/06 15:09:59 by guillaume_d      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef LIBFT_H
 # define LIBFT_H
+# include <stddef.h>
 # include <stdio.h>
 # include <stdlib.h>
 # include <string.h>

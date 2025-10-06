@@ -6,13 +6,11 @@
 /*   By: guillaume_deramchi <guillaume_deramchi@    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/04 22:51:50 by guillaume_d       #+#    #+#             */
-/*   Updated: 2025/10/04 23:53:37 by guillaume_d      ###   ########.fr       */
+/*   Updated: 2025/10/06 15:09:42 by guillaume_d      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-#include <stdio.h>
-#include <stdlib.h>
 
 int	ft_strslen(char **strs)
 {

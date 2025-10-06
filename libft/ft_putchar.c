@@ -6,11 +6,11 @@
 /*   By: guillaume_deramchi <guillaume_deramchi@    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/04 21:45:56 by guillaume_d       #+#    #+#             */
-/*   Updated: 2025/10/04 21:46:36 by guillaume_d      ###   ########.fr       */
+/*   Updated: 2025/10/06 15:10:19 by guillaume_d      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <unistd.h>
+#include "libft.h"
 
 void	ft_putchar(char c)
 {

@@ -6,14 +6,11 @@
 /*   By: guillaume_deramchi <guillaume_deramchi@    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/06 14:13:18 by guillaume_d       #+#    #+#             */
-/*   Updated: 2025/10/06 15:01:18 by guillaume_d      ###   ########.fr       */
+/*   Updated: 2025/10/06 15:10:07 by guillaume_d      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-#include <stddef.h>
-#include <stdio.h>
-#include <string.h>
 
 unsigned int	ft_strlcpy(char *dst, const char *src, unsigned int dstsize)
 {

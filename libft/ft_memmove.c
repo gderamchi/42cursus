@@ -6,14 +6,11 @@
 /*   By: guillaume_deramchi <guillaume_deramchi@    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/05 16:20:32 by guillaume_d       #+#    #+#             */
-/*   Updated: 2025/10/06 14:12:28 by guillaume_d      ###   ########.fr       */
+/*   Updated: 2025/10/06 15:10:35 by guillaume_d      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
 
 void	*ft_memmove(void *dst, const void *src, unsigned int len)
 {
