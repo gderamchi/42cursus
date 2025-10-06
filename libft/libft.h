@@ -6,7 +6,7 @@
 /*   By: guillaume_deramchi <guillaume_deramchi@    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/04 20:21:55 by guillaume_d       #+#    #+#             */
-/*   Updated: 2025/10/06 17:53:26 by guillaume_d      ###   ########.fr       */
+/*   Updated: 2025/10/06 18:41:23 by guillaume_d      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,5 +43,7 @@ void			*ft_memchr(const void *s, int c, unsigned int n);
 int				ft_memcmp(const void *s1, const void *s2, unsigned int n);
 char			*ft_strnstr(const char *haystack, const char *needle,
 					unsigned int len);
+char			*ft_strdup(const char *s1);
+void			*ft_calloc(size_t count, size_t size);
 
 #endif
