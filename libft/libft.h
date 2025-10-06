@@ -6,7 +6,7 @@
 /*   By: guillaume_deramchi <guillaume_deramchi@    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/04 20:21:55 by guillaume_d       #+#    #+#             */
-/*   Updated: 2025/10/06 15:26:14 by guillaume_d      ###   ########.fr       */
+/*   Updated: 2025/10/06 15:43:17 by guillaume_d      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,5 +38,7 @@ unsigned int	ft_strlcat(char *dst, const char *src, unsigned int dstsize);
 unsigned int	ft_strlcpy(char *dst, const char *src, unsigned int dstsize);
 int				ft_tolower(int c);
 int				ft_toupper(int c);
+char			*ft_strchr(const char *s, int c);
+char			*ft_strrchr(const char *s, int c);
 
 #endif
