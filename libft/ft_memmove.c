@@ -6,47 +6,61 @@
 /*   By: guillaume_deramchi <guillaume_deramchi@    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/05 16:20:32 by guillaume_d       #+#    #+#             */
-/*   Updated: 2025/10/05 16:57:17 by guillaume_d      ###   ########.fr       */
+/*   Updated: 2025/10/06 14:12:28 by guillaume_d      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-// void	*ft_memmove(void *dst, const void *src, unsigned int len)
-// {
-
-// }
+#include "libft.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 
-#define ELEMENT_COUNT 10
-
-int	main(void)
+void	*ft_memmove(void *dst, const void *src, unsigned int len)
 {
-	int		data[] = {20, 30, 40, 50, 60, 70, 80, 90, 100, 0};
-	void	*source;
-	void	*destination;
-	size_t	size;
+	unsigned int	i;
+	unsigned char	*dst2;
+	unsigned char	*src2;
 
-	// On crée une zone de mémoire de 10 entiers et contenant
-	// que neuf valeurs. La dixième est non utilisée (0).
-	// On affiche le contenu de la collection
-	for (int i = 0; i < ELEMENT_COUNT; i++)
+	i = 0;
+	dst2 = (unsigned char *)dst;
+	src2 = (unsigned char *)src;
+	if (!dst && !src)
+		return (NULL);
+	if (dst2 == src2 || len == 0)
+		return (dst);
+	if (dst2 < src2)
 	{
-		printf("%d ", data[i]);
+		while (i < len)
+		{
+			dst2[i] = src2[i];
+			i++;
+		}
 	}
-	puts("\n"); // Un retour à la ligne
-	// On décale les éléménts dans la collection ...
-	source = (void *)data;
-	destination = (void *)(data + 1);
-	size = ELEMENT_COUNT * sizeof(int);
-	memcpy(destination, source, size);
-	// ... pour y insérer une nouvelle valeur en tête
-	data[0] = 10;
-	// On affiche le contenu de la collection
-	for (int i = 0; i < ELEMENT_COUNT; i++)
+	else
 	{
-		printf("%d ", data[i]);
+		while (len-- > 0)
+			dst2[len] = src2[len];
 	}
-	puts("\n"); // Un retour à la ligne
-	return (EXIT_SUCCESS);
+	return (dst2);
 }
+
+// #define ELEMENT_COUNT 10
+
+// int	main(void)
+// {
+// 	int	data[] = {20, 30, 40, 50, 60, 70, 80, 90, 100, 0};
+
+// 	// print before
+// 	for (int i = 0; i < ELEMENT_COUNT; ++i)
+// 		printf("%d ", data[i]);
+// 	puts("");
+// 	// shift right by one position (safe)
+// 	ft_memmove(data + 1, data, (ELEMENT_COUNT - 1) * sizeof *data);
+// 	// now insert new head
+// 	data[0] = 10;
+// 	// print after: 10 20 30 40 50 60 70 80 90 100
+// 	for (int i = 0; i < ELEMENT_COUNT; ++i)
+// 		printf("%d ", data[i]);
+// 	puts("");
+// 	return (EXIT_SUCCESS);
+// }

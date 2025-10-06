@@ -6,9 +6,13 @@
 /*   By: guillaume_deramchi <guillaume_deramchi@    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/05 13:59:05 by guillaume_d       #+#    #+#             */
-/*   Updated: 2025/10/05 15:20:44 by guillaume_d      ###   ########.fr       */
+/*   Updated: 2025/10/06 14:09:17 by guillaume_d      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
 
 void	*ft_memset(void *b, int c, unsigned int len)
 {
@@ -17,6 +21,8 @@ void	*ft_memset(void *b, int c, unsigned int len)
 
 	i = 0;
 	ptr = (unsigned char *)b;
+	if (len == 0)
+		return (NULL);
 	while (i < len)
 	{
 		ptr[i] = (unsigned char)c;
@@ -24,10 +30,6 @@ void	*ft_memset(void *b, int c, unsigned int len)
 	}
 	return (b);
 }
-
-// #include <stdio.h>
-// #include <stdlib.h>
-// #include <string.h>
 
 // int	main(void)
 // {
