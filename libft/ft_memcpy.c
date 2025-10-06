@@ -6,13 +6,13 @@
 /*   By: guillaume_deramchi <guillaume_deramchi@    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/05 15:28:19 by guillaume_d       #+#    #+#             */
-/*   Updated: 2025/10/06 15:10:51 by guillaume_d      ###   ########.fr       */
+/*   Updated: 2025/10/06 15:54:33 by guillaume_d      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	*ft_memcpy(void *restrict dst, const void *restrict src, unsigned int n)
+void	*ft_memcpy(void *dst, const void *src, unsigned int n)
 {
 	unsigned char	*ptr;
 	unsigned char	*ptr2;
