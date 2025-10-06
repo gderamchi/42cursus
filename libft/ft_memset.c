@@ -6,7 +6,7 @@
 /*   By: guillaume_deramchi <guillaume_deramchi@    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/05 13:59:05 by guillaume_d       #+#    #+#             */
-/*   Updated: 2025/10/06 15:10:31 by guillaume_d      ###   ########.fr       */
+/*   Updated: 2025/10/06 18:19:11 by guillaume_d      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	*ft_memset(void *b, int c, unsigned int len)
 {
-	int				i;
+	unsigned int	i;
 	unsigned char	*ptr;
 
 	i = 0;
