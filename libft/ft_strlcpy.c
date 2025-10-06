@@ -6,32 +6,34 @@
 /*   By: guillaume_deramchi <guillaume_deramchi@    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/06 14:13:18 by guillaume_d       #+#    #+#             */
-/*   Updated: 2025/10/06 14:34:54 by guillaume_d      ###   ########.fr       */
+/*   Updated: 2025/10/06 15:01:18 by guillaume_d      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-#include <string.h>
-#include <stdio.h>
 #include <stddef.h>
+#include <stdio.h>
+#include <string.h>
 
 unsigned int	ft_strlcpy(char *dst, const char *src, unsigned int dstsize)
 {
-	unsigned int size = dstsize - 1;
-	unsigned int i = 0;
-	unsigned int lendst = ft_strlen(dst);
-	unsigned int srclen = ft_strlen((char *)src);
-	if(dstsize == 0)
-		return srclen;
-	while(i < size)
+	unsigned int	size;
+	unsigned int	i;
+	unsigned int	srclen;
+
+	size = dstsize - 1;
+	i = 0;
+	srclen = ft_strlen((char *)src);
+	if (dstsize == 0)
+		return (srclen);
+	while (i < size)
 	{
 		dst[i] = src[i];
 		i++;
 	}
 	dst[i] = '\0';
-	return srclen;
+	return (srclen);
 }
-
 
 // int main(void)
 // {
@@ -48,9 +50,9 @@ unsigned int	ft_strlcpy(char *dst, const char *src, unsigned int dstsize)
 //     };
 //     size_t sizes[] = {16, 0, 1, 6, 5, 10, 32};
 
-//     for (int s = 0; s < sizeof(sources)/sizeof(sources[0]); s++)
+//     for (unsigned long s = 0; s < sizeof(sources)/sizeof(sources[0]); s++)
 //     {
-//         for (int z = 0; z < sizeof(sizes)/sizeof(sizes[0]); z++)
+//         for (unsigned long z = 0; z < sizeof(sizes)/sizeof(sizes[0]); z++)
 //         {
 //             // Pré-remplir pour vérifier si des bytes sont écrasés
 //             for (int i = 0; i < 32; i++) d_ref[i] = d_ft[i] = (char)0xCC;
@@ -64,6 +66,5 @@ unsigned int	ft_strlcpy(char *dst, const char *src, unsigned int dstsize)
 //         }
 //     }
 
-//     return 0;
+//     return (0);
 // }
-
