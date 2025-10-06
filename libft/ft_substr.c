@@ -1,38 +1,45 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strjoin.c                                       :+:      :+:    :+:   */
+/*   ft_substr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: guillaume_deramchi <guillaume_deramchi@    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/10/04 22:51:50 by guillaume_d       #+#    #+#             */
-/*   Updated: 2025/10/06 23:00:47 by guillaume_d      ###   ########.fr       */
+/*   Created: 2025/10/06 22:00:47 by guillaume_d       #+#    #+#             */
+/*   Updated: 2025/10/06 22:30:06 by guillaume_d      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_strjoin(char const *s1, char const *s2)
+char	*ft_substr(char const *s, unsigned int start, size_t len)
 {
+	size_t	len_to_malloc;
 	char	*res;
-	int		total;
+	size_t	i;
 
-	total = ft_strlen((char *)s1) + ft_strlen((char *)s2) + 1;
-	res = (char *)malloc(total);
+	len_to_malloc = ft_strlen((char *)s) - start;
+	i = 0;
+	if (len <= len_to_malloc)
+		res = (char *)malloc(len + 1);
+	else
+		res = (char *)malloc(len_to_malloc + 1);
 	if (!res)
 		return (NULL);
-	ft_strlcpy(res, s1, ft_strlen((char *)s1) + 1);
-	ft_strlcat(res, s2, total);
+	s += start;
+	while (*s && i < len)
+	{
+		res[i] = *s;
+		s++;
+		i++;
+	}
+	res[i] = '\0';
 	return (res);
 }
 
-// int	main(void)
+// int main(void)
 // {
-// 	char	*str;
-// 	char	*str2;
-
-// 	str = "Salut frérot ";
-// 	str2 = "comment tu vas depuis ?";
-// 	printf("%s\n", ft_strjoin(str, str2));
+// 	char *str = "";
+// 	printf("%s\n", ft_substr(str, 100, 10));
 // 	return (0);
 // }

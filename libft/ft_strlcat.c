@@ -6,7 +6,7 @@
 /*   By: guillaume_deramchi <guillaume_deramchi@    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/06 14:42:19 by guillaume_d       #+#    #+#             */
-/*   Updated: 2025/10/06 15:05:00 by guillaume_d      ###   ########.fr       */
+/*   Updated: 2025/10/06 22:59:40 by guillaume_d      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ unsigned int	ft_strlcat(char *dst, const char *src, unsigned int dstsize)
 		return (srclen);
 	while (dst[i])
 		i++;
-	while (i < size)
+	while (j < size && src[j])
 	{
 		dst[i] = src[j];
 		j++;

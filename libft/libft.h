@@ -6,7 +6,7 @@
 /*   By: guillaume_deramchi <guillaume_deramchi@    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/04 20:21:55 by guillaume_d       #+#    #+#             */
-/*   Updated: 2025/10/06 18:41:23 by guillaume_d      ###   ########.fr       */
+/*   Updated: 2025/10/06 22:43:21 by guillaume_d      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 
 int				ft_strncmp(char *s1, char *s2, int n);
 int				ft_strlen(char *str);
-char			*ft_strjoin(char **input, char *sep);
+char			*ft_strjoin(const char *s1, const char *s2);
 int				ft_strcmp(char *s1, char *s2);
 void			ft_putchar(char c);
 int				ft_atoi(char *str);
@@ -45,5 +45,6 @@ char			*ft_strnstr(const char *haystack, const char *needle,
 					unsigned int len);
 char			*ft_strdup(const char *s1);
 void			*ft_calloc(size_t count, size_t size);
+char			*ft_substr(char const *s, unsigned int start, size_t len);
 
 #endif
