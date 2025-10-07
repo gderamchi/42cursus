@@ -6,7 +6,7 @@
 /*   By: guillaume_deramchi <guillaume_deramchi@    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/04 20:21:55 by guillaume_d       #+#    #+#             */
-/*   Updated: 2025/10/07 01:49:53 by guillaume_d      ###   ########.fr       */
+/*   Updated: 2025/10/08 01:55:03 by guillaume_d      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,5 +47,6 @@ char			*ft_strdup(const char *s1);
 void			*ft_calloc(size_t count, size_t size);
 char			*ft_substr(char const *s, unsigned int start, size_t len);
 char			*ft_strtrim(char const *s1, char const *set);
+char			**ft_split(char const *s, char c);
 
 #endif
