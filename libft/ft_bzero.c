@@ -6,14 +6,14 @@
 /*   By: guillaume_deramchi <guillaume_deramchi@    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/05 15:23:34 by guillaume_d       #+#    #+#             */
-/*   Updated: 2025/10/05 15:27:45 by guillaume_d      ###   ########.fr       */
+/*   Updated: 2025/10/07 02:06:45 by guillaume_d      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 void	ft_bzero(void *s, unsigned int n)
 {
 	unsigned char	*ptr;
-	int				i;
+	unsigned int	i;
 
 	ptr = (unsigned char *)s;
 	i = 0;

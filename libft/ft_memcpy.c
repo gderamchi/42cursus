@@ -6,7 +6,7 @@
 /*   By: guillaume_deramchi <guillaume_deramchi@    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/05 15:28:19 by guillaume_d       #+#    #+#             */
-/*   Updated: 2025/10/06 15:54:33 by guillaume_d      ###   ########.fr       */
+/*   Updated: 2025/10/07 02:07:00 by guillaume_d      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	*ft_memcpy(void *dst, const void *src, unsigned int n)
 {
 	unsigned char	*ptr;
 	unsigned char	*ptr2;
-	int				i;
+	unsigned int	i;
 
 	i = 0;
 	ptr = (unsigned char *)dst;
