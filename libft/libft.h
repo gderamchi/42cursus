@@ -6,7 +6,7 @@
 /*   By: guillaume_deramchi <guillaume_deramchi@    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/04 20:21:55 by guillaume_d       #+#    #+#             */
-/*   Updated: 2025/10/09 09:00:09 by guillaume_d      ###   ########.fr       */
+/*   Updated: 2025/10/09 11:34:53 by guillaume_d      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,5 +50,10 @@ char			*ft_strtrim(char const *s1, char const *set);
 char			**ft_split(char const *s, char c);
 char			*ft_itoa(int n);
 char			*ft_strmapi(char const *s, char (*f)(unsigned int, char));
+void			ft_striteri(char *s, void (*f)(unsigned int, char *));
+void			ft_putstr_fd(char *s, int fd);
+void			ft_putchar_fd(char c, int fd);
+void			ft_putnbr_fd(int n, int fd);
+void			ft_putendl_fd(char *s, int fd);
 
 #endif
