@@ -6,7 +6,7 @@
 /*   By: guillaume_deramchi <guillaume_deramchi@    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/09 06:57:14 by guillaume_d       #+#    #+#             */
-/*   Updated: 2025/10/09 08:56:36 by guillaume_d      ###   ########.fr       */
+/*   Updated: 2025/10/11 13:42:25 by guillaume_d      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ char	*ft_strmapi(char const *s, char (*f)(unsigned int, char))
 	i = 0;
 	if (!s)
 		return (NULL);
-	res = (char *)malloc(ft_strlen(s) + 1);
+	res = (char *)malloc(ft_strlen((char *)s) + 1);
 	if (!res)
 		return (NULL);
 	while (s[i])
