@@ -1,26 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstsize.c                                       :+:      :+:    :+:   */
+/*   ft_lstmap.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: guillaume_deramchi <guillaume_deramchi@    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/10/10 19:39:02 by guillaume_d       #+#    #+#             */
-/*   Updated: 2025/10/12 19:10:48 by guillaume_d      ###   ########.fr       */
+/*   Created: 2025/10/12 19:21:12 by guillaume_d       #+#    #+#             */
+/*   Updated: 2025/10/12 19:30:19 by guillaume_d      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int	ft_lstsize(t_list *lst)
+t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *))
 {
-	int	i;
+	t_list	*res;
 
-	i = 0;
+	res = malloc(sizeof(t_list));
+	if (!res)
+		return (NULL);
+	res = lst;
 	while (lst != NULL)
 	{
+		f(lst);
 		lst = lst->next;
-		i++;
 	}
-	return (i);
+	return (res);
 }

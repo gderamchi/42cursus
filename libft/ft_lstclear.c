@@ -6,7 +6,7 @@
 /*   By: guillaume_deramchi <guillaume_deramchi@    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/11 13:21:54 by guillaume_d       #+#    #+#             */
-/*   Updated: 2025/10/11 13:32:13 by guillaume_d      ###   ########.fr       */
+/*   Updated: 2025/10/12 19:14:57 by guillaume_d      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,13 +17,11 @@ void	ft_lstclear(t_list **lst, void (*del)(void *))
 	int	i;
 
 	i = 0;
-	while (lst[i]->next != NULL)
+	while (lst[i] != NULL)
 	{
 		del(lst[i]);
-		free(lst[i]->content);
+		free(lst[i]);
 		i++;
 	}
-	del(lst[i]);
-	free(lst[i]->content);
-	lst[i] = NULL;
+	lst = NULL;
 }
