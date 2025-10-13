@@ -6,13 +6,13 @@
 /*   By: guillaume_deramchi <guillaume_deramchi@    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/07 14:39:57 by guillaume_d       #+#    #+#             */
-/*   Updated: 2025/10/08 01:54:48 by guillaume_d      ###   ########.fr       */
+/*   Updated: 2025/10/13 22:38:22 by guillaume_d      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	**result(char **res, char const *s, char c)
+static char	**result(char **res, char const *s, char c)
 {
 	int	len;
 	int	i;

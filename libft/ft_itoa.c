@@ -6,13 +6,13 @@
 /*   By: guillaume_deramchi <guillaume_deramchi@    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/08 14:17:01 by guillaume_d       #+#    #+#             */
-/*   Updated: 2025/10/08 15:07:51 by guillaume_d      ###   ########.fr       */
+/*   Updated: 2025/10/13 22:37:49 by guillaume_d      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	reverse_string(char *res)
+static void	reverse_string(char *res)
 {
 	int		len;
 	int		i;
@@ -32,7 +32,7 @@ void	reverse_string(char *res)
 	}
 }
 
-char	*itoazation(char *res, long n, int sign)
+static char	*itoazation(char *res, long n, int sign)
 {
 	int	i;
 
