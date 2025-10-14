@@ -1,49 +1,45 @@
-# **************************************************************************** #
-#                                                                              #
-#                                                         :::      ::::::::    #
-#    Makefile                                           :+:      :+:    :+:    #
-#                                                     +:+ +:+         +:+      #
-#    By: guillaume_deramchi <guillaume_deramchi@    +#+  +:+       +#+         #
-#                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2025/10/13 22:41:13 by guillaume_d       #+#    #+#              #
-#    Updated: 2025/10/13 22:42:52 by guillaume_d      ###   ########.fr        #
-#                                                                              #
-# **************************************************************************** #
+SRC			= ft_memset ft_bzero ft_memcpy ft_memccpy ft_memmove ft_memchr ft_memcmp ft_strlen ft_isalpha ft_isdigit ft_isalnum ft_isascii ft_isprint ft_toupper ft_tolower ft_strchr ft_strrchr ft_strncmp ft_strlcpy ft_strlcat ft_strnstr ft_atoi ft_calloc ft_strdup ft_substr ft_strjoin ft_strtrim ft_split ft_itoa ft_strmapi ft_putchar_fd ft_putstr_fd ft_putendl_fd ft_putnbr_fd
 
-SRCS			=	ft_isalnum.c ft_isprint.c ft_memcmp.c  ft_putchar_fd.c ft_split.c \
-					ft_strlcat.c ft_strncmp.c ft_substr.c ft_atoi.c ft_isalpha.c \
-					ft_itoa.c ft_memcpy.c  ft_putendl_fd.c ft_strchr.c  ft_strlcpy.c \
-					ft_strnstr.c ft_tolower.c ft_bzero.c   ft_isascii.c ft_memcpy.c \
-					ft_memmove.c ft_putnbr_fd.c  ft_strdup.c  ft_strlen.c  ft_strrchr.c \
-					ft_toupper.c ft_calloc.c  ft_isdigit.c ft_memchr.c  ft_memset.c  \
-					ft_putstr_fd.c  ft_strjoin.c ft_strmapi.c ft_strtrim.c
-OBJS			= $(SRCS:.c=.o)
+B_SRC		= ft_lstnew ft_lstadd_front ft_lstsize ft_lstlast ft_lstadd_back ft_lstdelone ft_lstclear ft_lstiter ft_lstmap
 
-BONUS			=	ft_lstadd_back.c ft_lstadd_front.c ft_lstclear.c \
-					ft_lstdelone.c ft_lstiter.c ft_lstlast.c \
-					ft_lstmap.c ft_lstnew.c ft_lstsize.c
-BONUS_OBJS		= $(BONUS:.c=.o)
+SRCS		= $(addsuffix .c, ${SRC})
 
-CC				= cc
-RM				= rm -f
-CFLAGS			= -Wall -Wextra -Werror
+B_SRCS		= $(addsuffix _bonus.c, ${B_SRC})
 
-NAME			= libft.a
+HEAD		= ./includes/
 
-all:			$(NAME)
+OBJS		= ${SRCS:.c=.o}
 
-$(NAME):		$(OBJS)
-				ar rcs $(NAME) $(OBJS)
+B_OBJS		= ${B_SRCS:.c=.o}
+
+NAME		= libft.a
+
+CC			= gcc
+RM			= rm -f
+AR			= ar rc
+RN			= ranlib
+
+CFLAGS		= -Wall -Wextra -Werror
+
+.c.o:
+			${CC} ${CFLAGS} -c $< -o ${<:.c=.o}
+
+$(NAME):	${OBJS}
+			${AR} ${NAME} ${OBJS}
+			${RN} ${NAME}
+
+bonus:		${B_OBJS}
+			${AR} ${NAME} ${B_OBJS}
+			${RN} ${NAME}
+
+all:		$(NAME)
 
 clean:
-				$(RM) $(OBJS) $(BONUS_OBJS)
+			${RM} ${OBJS} ${B_OBJS}
 
-fclean:			clean
-				$(RM) $(NAME)
+fclean:		clean
+			${RM} $(NAME)
 
-re:				fclean $(NAME)
+re:			fclean all
 
-bonus:			$(OBJS) $(BONUS_OBJS)
-				ar rcs $(NAME) $(OBJS) $(BONUS_OBJS)
-
-.PHONY:			all clean fclean re bonus
+.PHONY:		all bonus clean fclean re
