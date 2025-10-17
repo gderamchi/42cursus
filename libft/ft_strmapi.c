@@ -6,7 +6,7 @@
 /*   By: guillaume_deramchi <guillaume_deramchi@    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/09 06:57:14 by guillaume_d       #+#    #+#             */
-/*   Updated: 2025/10/11 13:42:25 by guillaume_d      ###   ########.fr       */
+/*   Updated: 2025/10/17 07:24:27 by guillaume_d      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,8 @@ char	*ft_strmapi(char const *s, char (*f)(unsigned int, char))
 	while (s[i])
 	{
 		res[i] = f(i, s[i]);
+		if (!res[i])
+			return (NULL);
 		i++;
 	}
 	res[i] = '\0';
