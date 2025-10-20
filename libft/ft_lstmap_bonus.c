@@ -6,7 +6,7 @@
 /*   By: guillaume_deramchi <guillaume_deramchi@    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/12 19:21:12 by guillaume_d       #+#    #+#             */
-/*   Updated: 2025/10/17 07:32:17 by guillaume_d      ###   ########.fr       */
+/*   Updated: 2025/10/20 14:34:27 by guillaume_d      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,24 +14,50 @@
 
 t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *))
 {
-	t_list	*res;
-	t_list	*begin;
+	t_list	*head;
+	t_list	*tail;
+	t_list	*new;
 
-	res = malloc(sizeof(t_list) * (ft_lstsize(lst) + 1));
-	if (!res)
-		return (NULL);
-	begin = res;
-	while (lst != NULL)
+	head = NULL;
+	while (lst)
 	{
-		res = f(lst);
-		if (!res)
+		if (!(new = malloc(sizeof(t_list))))
 		{
-			ft_lstclear(begin, del);
+			ft_lstclear(&head, del);
 			return (NULL);
 		}
-		res = res->next;
+		new->content = f(lst->content);
+		new->next = NULL;
+		if (!head)
+			head = new;
+		tail->next = new;
+		tail = new;
 		lst = lst->next;
 	}
-	res = NULL;
-	return (res);
+	return (head);
 }
+
+// int	main(void)
+// {
+// 	t_list	*test;
+// 	int		i;
+
+// 	i = 0;
+// 	test = malloc(sizeof(t_list));
+// 	if (!test)
+// 		return (0);
+// 	while (i < 5)
+// 	{
+// 		test->content = i * 10;
+// 		test = test->next;
+// 		i++;
+// 	}
+// 	i = 0;
+// 	while (i < 5)
+// 	{
+// 		printf("%p\n", (int *)test->content);
+// 		test = test->next;
+// 		i++;
+// 	}
+// 	return (0);
+// }
