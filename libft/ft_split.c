@@ -6,7 +6,7 @@
 /*   By: guillaume_deramchi <guillaume_deramchi@    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/07 14:39:57 by guillaume_d       #+#    #+#             */
-/*   Updated: 2025/10/13 22:38:22 by guillaume_d      ###   ########.fr       */
+/*   Updated: 2025/10/27 00:44:12 by guillaume_d      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,8 @@ char	**ft_split(char const *s, char c)
 		}
 	}
 	res = (char **)malloc(sizeof(char *) * (words + 1));
+	if (!res)
+		return (NULL);
 	return (result(res, s, c));
 }
 
@@ -68,6 +70,8 @@ char	**ft_split(char const *s, char c)
 // {
 // 	if (ac != 3)
 // 		return (0);
-// 	printf("%s\n", ft_split(av[1], av[2][0])[8]);
+// 	int i = 0;
+// 	while(i < 6)
+// 		printf("%s\n", ft_split(av[1], av[2][0])[i++]);
 // 	return (0);
 // }
