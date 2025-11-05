@@ -6,7 +6,7 @@
 /*   By: guillaume_deramchi <guillaume_deramchi@    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/06 14:42:19 by guillaume_d       #+#    #+#             */
-/*   Updated: 2025/10/06 22:59:40 by guillaume_d      ###   ########.fr       */
+/*   Updated: 2025/11/04 20:10:46 by guillaume_d      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,8 @@ unsigned int	ft_strlcat(char *dst, const char *src, unsigned int dstsize)
 	srclen = ft_strlen((char *)src);
 	dstlen = ft_strlen(dst);
 	size = dstsize - dstlen - 1;
-	if (dstsize == 0)
-		return (srclen);
+	if (dstlen >= dstsize || dstsize == 0)
+		return (dstsize + srclen);
 	while (dst[i])
 		i++;
 	while (j < size && src[j])
@@ -79,7 +79,7 @@ unsigned int	ft_strlcat(char *dst, const char *src, unsigned int dstsize)
 // //                 printf("  return: ref=%zu  ft=%zu  %s\n", r_ref, r_ft,
 // 	(r_ref == r_ft ? "OK" : "MISMATCH"));
 // //                 printf("  dst:    ref=\"%s\"  ft=\"%s\"\n\n", d_ref,
-	// d_ft);
+// d_ft);
 // //             }
 // //         }
 // //     }

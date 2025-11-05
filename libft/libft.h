@@ -6,7 +6,7 @@
 /*   By: guillaume_deramchi <guillaume_deramchi@    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/04 20:21:55 by guillaume_d       #+#    #+#             */
-/*   Updated: 2025/10/12 19:30:51 by guillaume_d      ###   ########.fr       */
+/*   Updated: 2025/11/04 16:21:09 by guillaume_d      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ int					ft_strlen(char *str);
 char				*ft_strjoin(const char *s1, const char *s2);
 int					ft_strcmp(char *s1, char *s2);
 void				ft_putchar(char c);
-int					ft_atoi(char *str);
+int					ft_atoi(const char *str);
 void				*ft_memcpy(void *dst, const void *src, unsigned int n);
 void				ft_bzero(void *s, unsigned int n);
 int					ft_isalnum(int c);

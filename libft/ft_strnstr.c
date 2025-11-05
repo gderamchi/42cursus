@@ -6,7 +6,7 @@
 /*   By: guillaume_deramchi <guillaume_deramchi@    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/06 17:32:57 by guillaume_d       #+#    #+#             */
-/*   Updated: 2025/10/06 17:52:35 by guillaume_d      ###   ########.fr       */
+/*   Updated: 2025/11/04 20:23:10 by guillaume_d      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ char	*ft_strnstr(const char *haystack, const char *needle, unsigned int len)
 	{
 		j = 0;
 		k = i;
-		while (haystack[k] == needle[j])
+		while (haystack[k] == needle[j] && k < len)
 		{
 			j++;
 			k++;

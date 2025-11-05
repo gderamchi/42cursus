@@ -6,7 +6,7 @@
 /*   By: guillaume_deramchi <guillaume_deramchi@    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/05 15:28:19 by guillaume_d       #+#    #+#             */
-/*   Updated: 2025/10/07 02:07:00 by guillaume_d      ###   ########.fr       */
+/*   Updated: 2025/11/04 20:02:02 by guillaume_d      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,10 +36,11 @@ void	*ft_memcpy(void *dst, const void *src, unsigned int n)
 // int	main(void)
 // {
 // 	int				array[] = {54, 85, 20, 63, 21};
-// 	int				array2[] = {1, 2, 3, 4, 5};
+// 	int				*array2;
 // 	unsigned int	size;
 // 	int				length;
 
+// 	array2 = NULL;
 // 	size = sizeof(int) * 5;
 // 	/* Display the initial values */
 // 	for (length = 0; length < 5; length++)

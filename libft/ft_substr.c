@@ -6,7 +6,7 @@
 /*   By: guillaume_deramchi <guillaume_deramchi@    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/06 22:00:47 by guillaume_d       #+#    #+#             */
-/*   Updated: 2025/10/06 22:30:06 by guillaume_d      ###   ########.fr       */
+/*   Updated: 2025/11/05 10:52:25 by guillaume_d      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,8 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 
 	len_to_malloc = ft_strlen((char *)s) - start;
 	i = 0;
+	if (start > (unsigned int)ft_strlen((char *)s))
+		return ("");
 	if (len <= len_to_malloc)
 		res = (char *)malloc(len + 1);
 	else

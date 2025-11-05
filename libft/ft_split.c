@@ -6,11 +6,22 @@
 /*   By: guillaume_deramchi <guillaume_deramchi@    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/07 14:39:57 by guillaume_d       #+#    #+#             */
-/*   Updated: 2025/10/27 00:44:12 by guillaume_d      ###   ########.fr       */
+/*   Updated: 2025/11/05 16:03:22 by guillaume_d      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
+
+static void	skip_characters(int *i, const char *s, int *len, char c)
+{
+	while (s[*i] == c && s[*i])
+		(*i)++;
+	while (s[*i] != c && s[*i])
+	{
+		(*i)++;
+		(*len)++;
+	}
+}
 
 static char	**result(char **res, char const *s, char c)
 {
@@ -23,18 +34,15 @@ static char	**result(char **res, char const *s, char c)
 	while (s[i])
 	{
 		len = 0;
-		while (s[i] == c && s[i])
-			i++;
-		while (s[i] != c && s[i])
+		skip_characters(&i, s, &len, c);
+		if (len > 0)
 		{
-			len++;
-			i++;
+			res[j] = (char *)malloc(sizeof(char) * (len + 1));
+			if (!res[j])
+				return (NULL);
+			i -= len;
+			ft_strlcpy(res[j++], &s[i], len + 1);
 		}
-		res[j] = (char *)malloc(sizeof(char) * (len + 1));
-		if (!res[j])
-			return (NULL);
-		i -= len;
-		ft_strlcpy(res[j++], &s[i], len + 1);
 		i += len;
 	}
 	res[j] = NULL;
@@ -68,10 +76,12 @@ char	**ft_split(char const *s, char c)
 
 // int	main(int ac, char **av)
 // {
+// 	int	i;
+
 // 	if (ac != 3)
 // 		return (0);
-// 	int i = 0;
-// 	while(i < 6)
+// 	i = 0;
+// 	while (i < 6)
 // 		printf("%s\n", ft_split(av[1], av[2][0])[i++]);
 // 	return (0);
 // }

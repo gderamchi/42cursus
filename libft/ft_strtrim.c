@@ -6,7 +6,7 @@
 /*   By: guillaume_deramchi <guillaume_deramchi@    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/07 01:01:55 by guillaume_d       #+#    #+#             */
-/*   Updated: 2025/10/13 22:38:57 by guillaume_d      ###   ########.fr       */
+/*   Updated: 2025/11/05 12:42:32 by guillaume_d      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,11 +47,12 @@ char	*ft_strtrim(char const *s1, char const *set)
 	char_from_end = 0;
 	while (char_from_end < final_alloc)
 		res[char_from_end++] = *s1++;
+	res[char_from_end] = '\0';
 	return (res);
 }
 
 // int	main(void)
 // {
-// 	printf("%s\n", ft_strtrim(" ", " "));
+// 	printf("%s\n", ft_strtrim(" asamirosiosi ah", " "));
 // 	return (0);
 // }

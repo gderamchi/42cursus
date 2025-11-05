@@ -6,7 +6,7 @@
 /*   By: guillaume_deramchi <guillaume_deramchi@    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/05 13:59:05 by guillaume_d       #+#    #+#             */
-/*   Updated: 2025/10/06 18:19:11 by guillaume_d      ###   ########.fr       */
+/*   Updated: 2025/11/04 17:21:08 by guillaume_d      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,8 @@ void	*ft_memset(void *b, int c, unsigned int len)
 	unsigned int	i;
 	unsigned char	*ptr;
 
-	i = 0;
 	ptr = (unsigned char *)b;
-	if (len == 0)
-		return (NULL);
+	i = 0;
 	while (i < len)
 	{
 		ptr[i] = (unsigned char)c;
@@ -43,7 +41,7 @@ void	*ft_memset(void *b, int c, unsigned int len)
 // 	}
 // 	printf("\n");
 // 	/* Reset the memory bloc */
-// 	ft_memset(array, 0, size);
+// 	ft_memset(array, -1, size);
 // 	/* Display the new values */
 // 	for (length = 0; length < 5; length++)
 // 	{

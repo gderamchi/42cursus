@@ -6,7 +6,7 @@
 /*   By: guillaume_deramchi <guillaume_deramchi@    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/08 14:17:01 by guillaume_d       #+#    #+#             */
-/*   Updated: 2025/10/13 22:37:49 by guillaume_d      ###   ########.fr       */
+/*   Updated: 2025/11/05 16:21:35 by guillaume_d      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,12 @@ static char	*itoazation(char *res, long n, int sign)
 	int	i;
 
 	i = 0;
+	if (n == 0)
+	{
+		res[i++] = '0';
+		res[i] = '\0';
+		return (res);
+	}
 	while (n != 0)
 	{
 		res[i++] = (n % 10) + '0';
@@ -57,7 +63,7 @@ char	*ft_itoa(int n)
 	long	nbr;
 
 	sign = 0;
-	len = 0;
+	len = 2;
 	nbr = n;
 	if (nbr < 0)
 	{
@@ -69,7 +75,7 @@ char	*ft_itoa(int n)
 		n /= 10;
 		len++;
 	}
-	res = (char *)malloc(sizeof(char) * (len + 1 + sign));
+	res = (char *)malloc(sizeof(char) * (len + sign));
 	if (!res)
 		return (NULL);
 	return (itoazation(res, nbr, sign));
@@ -77,6 +83,6 @@ char	*ft_itoa(int n)
 
 // int	main(void)
 // {
-// 	printf("%s\n", ft_itoa(2147483647));
+// 	printf("%s\n", ft_itoa(0));
 // 	return (0);
 // }

@@ -6,11 +6,11 @@
 /*   By: guillaume_deramchi <guillaume_deramchi@    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/04 20:40:04 by guillaume_d       #+#    #+#             */
-/*   Updated: 2025/10/04 20:40:48 by guillaume_d      ###   ########.fr       */
+/*   Updated: 2025/11/04 20:40:00 by guillaume_d      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int	ft_strlen(char *str)
+int	ft_strlen(const char *str)
 {
 	int	i;
 

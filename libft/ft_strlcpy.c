@@ -6,7 +6,7 @@
 /*   By: guillaume_deramchi <guillaume_deramchi@    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/06 14:13:18 by guillaume_d       #+#    #+#             */
-/*   Updated: 2025/10/06 15:10:07 by guillaume_d      ###   ########.fr       */
+/*   Updated: 2025/11/04 20:18:34 by guillaume_d      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ unsigned int	ft_strlcpy(char *dst, const char *src, unsigned int dstsize)
 	srclen = ft_strlen((char *)src);
 	if (dstsize == 0)
 		return (srclen);
-	while (i < size)
+	while (i < size && src[i])
 	{
 		dst[i] = src[i];
 		i++;

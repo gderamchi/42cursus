@@ -6,7 +6,7 @@
 /*   By: guillaume_deramchi <guillaume_deramchi@    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/06 15:37:37 by guillaume_d       #+#    #+#             */
-/*   Updated: 2025/10/06 15:42:48 by guillaume_d      ###   ########.fr       */
+/*   Updated: 2025/11/04 19:01:40 by guillaume_d      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,27 +14,25 @@
 
 char	*ft_strrchr(const char *s, int c)
 {
-	unsigned int	len;
+	unsigned char	*last;
 
-	len = ft_strlen((char *)s);
-	s += len;
-	if (c == *s)
-		return ((char *)s);
-	s--;
+	last = NULL;
 	while (*s)
 	{
-		if (*s == c)
-			return ((char *)s);
-		s--;
+		if ((unsigned char)*s == (unsigned char)c)
+			last = (unsigned char *)s;
+		s++;
 	}
-	return (NULL);
+	if ((unsigned char)*s == (unsigned char)c)
+		last = (unsigned char *)s;
+	return ((char *)last);
 }
 
 // int	main(void)
 // {
 // 	char	*str;
 
-// 	str = "Salut fdp comment tu vas";
-// 	printf("%s\n", ft_strrchr(str, ' '));
+// 	str = "aabebdahsbz";
+// 	printf("%s\n", ft_strrchr(str, 'c'));
 // 	return (0);
 // }
