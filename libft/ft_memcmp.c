@@ -6,7 +6,7 @@
 /*   By: guillaume_deramchi <guillaume_deramchi@    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/06 17:23:15 by guillaume_d       #+#    #+#             */
-/*   Updated: 2025/11/04 20:45:47 by guillaume_d      ###   ########.fr       */
+/*   Updated: 2025/11/08 13:58:14 by guillaume_d      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int	ft_memcmp(const void *s1, const void *s2, unsigned int n)
 	i = 0;
 	if (n == 0)
 		return (0);
-	while (*ptr1 && *ptr2 && *ptr1 == *ptr2 && i < n - 1)
+	while (*ptr1 == *ptr2 && i < n - 1)
 	{
 		ptr1++;
 		ptr2++;

@@ -6,7 +6,7 @@
 /*   By: guillaume_deramchi <guillaume_deramchi@    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/04 20:21:55 by guillaume_d       #+#    #+#             */
-/*   Updated: 2025/11/04 16:21:09 by guillaume_d      ###   ########.fr       */
+/*   Updated: 2025/11/08 13:19:14 by guillaume_d      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ typedef struct s_list
 	struct s_list	*next;
 }					t_list;
 
-int					ft_strncmp(char *s1, char *s2, int n);
+int					ft_strncmp(const char *s1, const char *s2, int n);
 int					ft_strlen(char *str);
 char				*ft_strjoin(const char *s1, const char *s2);
 int					ft_strcmp(char *s1, char *s2);

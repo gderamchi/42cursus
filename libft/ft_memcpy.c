@@ -6,7 +6,7 @@
 /*   By: guillaume_deramchi <guillaume_deramchi@    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/05 15:28:19 by guillaume_d       #+#    #+#             */
-/*   Updated: 2025/11/04 20:02:02 by guillaume_d      ###   ########.fr       */
+/*   Updated: 2025/11/08 14:09:58 by guillaume_d      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,10 +21,8 @@ void	*ft_memcpy(void *dst, const void *src, unsigned int n)
 	i = 0;
 	ptr = (unsigned char *)dst;
 	ptr2 = (unsigned char *)src;
-	if (!dst && !src)
+	if (ptr == NULL && ptr2 == NULL)
 		return (NULL);
-	if (n == 0 || !src)
-		return (dst);
 	while (i < n)
 	{
 		ptr[i] = ptr2[i];

@@ -6,7 +6,7 @@
 /*   By: guillaume_deramchi <guillaume_deramchi@    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/06 16:39:07 by guillaume_d       #+#    #+#             */
-/*   Updated: 2025/11/04 19:03:17 by guillaume_d      ###   ########.fr       */
+/*   Updated: 2025/11/08 13:47:54 by guillaume_d      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,24 +19,21 @@ void	*ft_memchr(const void *s, int c, unsigned int n)
 
 	i = 0;
 	ptr = (unsigned char *)s;
-	while (*ptr && i < n)
+	while (i < n)
 	{
 		if (*ptr == (unsigned char)c)
 			return ((void *)ptr);
 		ptr++;
 		i++;
 	}
-	if (*ptr == (unsigned char)c && i < n)
-		return ((void *)ptr);
 	return (NULL);
 }
 
 // int	main(void)
 // {
-// 	char	*str;
+// 	char	s[] = {0, 1, 2, 3, 4, 5};
 
-// 	str = "Salut fdp comment tu vas";
-// 	printf("%s\n", (char *)ft_memchr(str, 's', ft_strlen(str)));
-// 	printf("%s\n", (char *)memchr(str, 's', ft_strlen(str)));
+// 	printf("%p\n", (char *)ft_memchr(s, 2, 3));
+// 	printf("%p\n", (char *)memchr(s, 2, 3));
 // 	return (0);
 // }
