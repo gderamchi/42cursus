@@ -6,7 +6,7 @@
 /*   By: guillaume_deramchi <guillaume_deramchi@    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/05 16:20:32 by guillaume_d       #+#    #+#             */
-/*   Updated: 2025/11/08 14:17:16 by guillaume_d      ###   ########.fr       */
+/*   Updated: 2025/11/08 14:35:50 by guillaume_d      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,6 @@ void	*ft_memmove(void *dst, const void *src, size_t len)
 	src2 = (unsigned char *)src;
 	if (len == 0)
 		return (NULL);
-	
 	if (dst2 < src2)
 	{
 		while (i < len)
