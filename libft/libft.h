@@ -6,7 +6,7 @@
 /*   By: guillaume_deramchi <guillaume_deramchi@    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/04 20:21:55 by guillaume_d       #+#    #+#             */
-/*   Updated: 2025/11/08 13:19:14 by guillaume_d      ###   ########.fr       */
+/*   Updated: 2025/11/10 11:16:43 by guillaume_d      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ int					ft_isalpha(int c);
 int					ft_isascii(int c);
 int					ft_isdigit(int c);
 int					ft_isprint(int c);
-void				*ft_memmove(void *dst, const void *src, unsigned int len);
+void				*ft_memmove(void *dst, const void *src, size_t len);
 void				*ft_memset(void *b, int c, unsigned int len);
 unsigned int		ft_strlcat(char *dst, const char *src,
 						unsigned int dstsize);
