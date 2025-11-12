@@ -6,7 +6,7 @@
 /*   By: guillaume_deramchi <guillaume_deramchi@    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/20 23:02:26 by guillaume_d       #+#    #+#             */
-/*   Updated: 2025/11/11 11:55:14 by guillaume_d      ###   ########.fr       */
+/*   Updated: 2025/11/11 18:52:10 by guillaume_d      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 # include <stdlib.h>
 # include <unistd.h>
 # ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 7
+#  define BUFFER_SIZE 1000000
 # endif
 
 unsigned int	ft_strlcat(char *dst, const char *src, unsigned int dstsize);

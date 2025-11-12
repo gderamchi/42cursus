@@ -6,7 +6,7 @@
 /*   By: guillaume_deramchi <guillaume_deramchi@    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/20 23:02:41 by guillaume_d       #+#    #+#             */
-/*   Updated: 2025/11/11 16:07:10 by guillaume_d      ###   ########.fr       */
+/*   Updated: 2025/11/11 21:54:18 by guillaume_d      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,6 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	if (!res)
 		return (NULL);
 	ft_strlcpy(res, s1, ft_strlen(s1) + 1);
-	free((void *)s1);
 	ft_strlcat(res, s2, total);
 	return (res);
 }
@@ -86,8 +85,6 @@ int	ft_strlen(const char *str)
 
 char	*ft_strchr(const char *s, int c)
 {
-	if (!s)
-		return (NULL);
 	while (*s)
 	{
 		if ((unsigned char)*s == (unsigned char)c)

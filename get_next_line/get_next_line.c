@@ -6,77 +6,115 @@
 /*   By: guillaume_deramchi <guillaume_deramchi@    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/20 23:02:29 by guillaume_d       #+#    #+#             */
-/*   Updated: 2025/11/11 18:47:16 by guillaume_d      ###   ########.fr       */
+/*   Updated: 2025/11/12 12:01:18 by guillaume_d      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-char	*ft_strdup(const char *s1)
+char	*ft_substr(char const *s, unsigned int start, size_t len)
 {
-	unsigned int	s1len;
-	char			*res;
+	size_t	s_len;
+	size_t	to_copy;
+	char	*res;
 
-	s1len = ft_strlen(s1);
-	res = (char *)malloc(sizeof(char) * (s1len + 1));
+	if (!s)
+		return (NULL);
+	s_len = ft_strlen(s);
+	if ((size_t)start >= s_len)
+	{
+		res = (char *)malloc(1);
+		if (!res)
+			return (NULL);
+		res[0] = '\0';
+		return (res);
+	}
+	to_copy = s_len - (size_t)start;
+	if (to_copy > len)
+		to_copy = len;
+	res = (char *)malloc(to_copy + 1);
 	if (!res)
 		return (NULL);
-	ft_strlcpy(res, s1, s1len + 1);
+	ft_strlcpy(res, s + start, to_copy + 1);
 	return (res);
 }
 
-char	*process(int fd, char buf[], char *line, char **tmp)
+char	*read_file(int fd, char *buffer)
 {
+	char	*tmp;
 	int		nbytes;
-	char	*newline_pos;
 
+	tmp = malloc(BUFFER_SIZE + 1);
 	nbytes = 1;
-	buf[0] = '\0';
-	while (nbytes > 0 && !ft_strchr(buf, '\n'))
+	tmp[0] = '\0';
+	while (nbytes > 0 && !ft_strchr(tmp, '\n'))
 	{
-		nbytes = read(fd, buf, BUFFER_SIZE);
-		if (nbytes == -1)
+		nbytes = read(fd, tmp, BUFFER_SIZE);
+		if (nbytes < 0)
 			return (NULL);
-		if (nbytes == 0)
-			return (line);
-		buf[nbytes] = '\0';
-		if (ft_strchr(buf, '\n'))
-		{
-			newline_pos = ft_strchr(buf, '\n');
-			*tmp = ft_strdup(newline_pos + 1);
-			*(newline_pos + 1) = '\0';
-			line = ft_strjoin(line, buf);
-			break ;
-		}
-		line = ft_strjoin(line, buf);
+		tmp[nbytes] = '\0';
+		buffer = ft_strjoin(tmp, buffer);
+		if (!buffer)
+			return (NULL);
 	}
-	return (line);
+	return (buffer);
+}
+
+char	*process_line(char *buffer)
+{
+	char	*res;
+	int		i;
+
+	i = 0;
+	res = malloc(1);
+	while (buffer[i] != '\n' && buffer[i])
+		i++;
+	if (buffer[i])
+		i++;
+	res = ft_substr(buffer, 0, i);
+	if (!res)
+		return (free(res), NULL);
+	return (res);
+}
+
+char	*process_next(char *buffer)
+{
+	char	*res;
+
+	res = malloc(1);
+	if (!res)
+		return (NULL);
+	while (*buffer != '\n' && *buffer)
+		buffer++;
+	if (*buffer)
+		buffer++;
+	res = ft_substr(buffer, 0, ft_strlen(buffer));
+	if (!res)
+		return (free(res), NULL);
+	return (res);
 }
 
 char	*get_next_line(int fd)
 {
 	char		*line;
-	static char	*rest;
-	char		buf[BUFFER_SIZE + 1];
-	char		*tmp;
+	static char	*buffer;
 
-	line = ft_strdup("");
-	tmp = NULL;
+	if (fd < 0 || BUFFER_SIZE <= 0)
+		return (NULL);
+	if (!buffer)
+	{
+		buffer = malloc(1);
+		buffer[0] = '\0';
+	}
+	buffer = read_file(fd, buffer);
+	if (!buffer)
+		return (NULL);
+	line = process_line(buffer);
 	if (!line)
-		return (NULL);
-	if (rest)
-	{
-		line = ft_strjoin(line, rest);
-		free(rest);
-		rest = NULL;
-	}
-	line = process(fd, buf, line, &tmp);
-	rest = tmp;
-	if (!line || *line == '\0')
-	{
-		free(line);
-		return (NULL);
-	}
+		return (free(line), NULL);
+	buffer = process_next(buffer);
+	if (!buffer)
+		return (free(buffer), NULL);
 	return (line);
 }
 
