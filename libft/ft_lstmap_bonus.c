@@ -6,7 +6,7 @@
 /*   By: guillaume_deramchi <guillaume_deramchi@    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/12 19:21:12 by guillaume_d       #+#    #+#             */
-/*   Updated: 2025/11/05 16:47:35 by guillaume_d      ###   ########.fr       */
+/*   Updated: 2025/11/10 12:04:45 by guillaume_d      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *))
 
 	head = NULL;
 	node = NULL;
+	tail = NULL;
 	while (lst)
 	{
 		tail = node;

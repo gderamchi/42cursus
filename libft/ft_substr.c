@@ -6,7 +6,7 @@
 /*   By: guillaume_deramchi <guillaume_deramchi@    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/06 22:00:47 by guillaume_d       #+#    #+#             */
-/*   Updated: 2025/11/05 10:52:25 by guillaume_d      ###   ########.fr       */
+/*   Updated: 2025/11/10 16:35:27 by guillaume_d      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,28 +14,28 @@
 
 char	*ft_substr(char const *s, unsigned int start, size_t len)
 {
-	size_t	len_to_malloc;
+	size_t	s_len;
+	size_t	to_copy;
 	char	*res;
-	size_t	i;
 
-	len_to_malloc = ft_strlen((char *)s) - start;
-	i = 0;
-	if (start > (unsigned int)ft_strlen((char *)s))
-		return ("");
-	if (len <= len_to_malloc)
-		res = (char *)malloc(len + 1);
-	else
-		res = (char *)malloc(len_to_malloc + 1);
+	if (!s)
+		return (NULL);
+	s_len = ft_strlen(s);
+	if ((size_t)start >= s_len)
+	{
+		res = (char *)malloc(1);
+		if (!res)
+			return (NULL);
+		res[0] = '\0';
+		return (res);
+	}
+	to_copy = s_len - (size_t)start;
+	if (to_copy > len)
+		to_copy = len;
+	res = (char *)malloc(to_copy + 1);
 	if (!res)
 		return (NULL);
-	s += start;
-	while (*s && i < len)
-	{
-		res[i] = *s;
-		s++;
-		i++;
-	}
-	res[i] = '\0';
+	ft_strlcpy(res, s + start, to_copy + 1);
 	return (res);
 }
 

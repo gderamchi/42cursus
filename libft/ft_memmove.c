@@ -6,7 +6,7 @@
 /*   By: guillaume_deramchi <guillaume_deramchi@    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/05 16:20:32 by guillaume_d       #+#    #+#             */
-/*   Updated: 2025/11/08 14:35:50 by guillaume_d      ###   ########.fr       */
+/*   Updated: 2025/11/10 16:53:15 by guillaume_d      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,29 +14,17 @@
 
 void	*ft_memmove(void *dst, const void *src, size_t len)
 {
-	unsigned int		i;
-	unsigned char		*dst2;
-	const unsigned char	*src2;
+	unsigned char	*temp1;
+	unsigned char	*temp2;
 
-	i = 0;
-	dst2 = (unsigned char *)dst;
-	src2 = (unsigned char *)src;
-	if (len == 0)
-		return (NULL);
-	if (dst2 < src2)
-	{
-		while (i < len)
-		{
-			dst2[i] = src2[i];
-			i++;
-		}
-	}
-	else
-	{
-		while (len-- > 0)
-			dst2[len] = src2[len];
-	}
-	return (dst2);
+	temp1 = dst;
+	temp2 = (unsigned char *)src;
+	if (dst < src)
+		return (ft_memcpy(dst, src, len));
+	if (dst > src)
+		while (len--)
+			temp1[len] = temp2[len];
+	return (dst);
 }
 
 // #define ELEMENT_COUNT 10

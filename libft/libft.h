@@ -6,13 +6,14 @@
 /*   By: guillaume_deramchi <guillaume_deramchi@    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/04 20:21:55 by guillaume_d       #+#    #+#             */
-/*   Updated: 2025/11/10 11:16:43 by guillaume_d      ###   ########.fr       */
+/*   Updated: 2025/11/10 12:53:04 by guillaume_d      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef LIBFT_H
 # define LIBFT_H
 # include <stddef.h>
+# include <stdint.h>
 # include <stdio.h>
 # include <stdlib.h>
 # include <string.h>
@@ -25,7 +26,7 @@ typedef struct s_list
 }					t_list;
 
 int					ft_strncmp(const char *s1, const char *s2, int n);
-int					ft_strlen(char *str);
+int					ft_strlen(const char *str);
 char				*ft_strjoin(const char *s1, const char *s2);
 int					ft_strcmp(char *s1, char *s2);
 void				ft_putchar(char c);
