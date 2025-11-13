@@ -6,7 +6,7 @@
 /*   By: guillaume_deramchi <guillaume_deramchi@    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/20 23:02:26 by guillaume_d       #+#    #+#             */
-/*   Updated: 2025/11/11 18:52:10 by guillaume_d      ###   ########.fr       */
+/*   Updated: 2025/11/13 01:18:52 by guillaume_d      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,5 +25,10 @@ unsigned int	ft_strlcpy(char *dst, const char *src, unsigned int dstsize);
 char			*ft_strjoin(char const *s1, char const *s2);
 int				ft_strlen(const char *str);
 char			*ft_strchr(const char *s, int c);
+char			*ft_substr(char const *s, unsigned int start, size_t len);
+char			*read_file(int fd, char *buffer);
+char			*process_line(char *buffer);
+char			*process_next(char *buffer);
+char			*get_next_line(int fd);
 
 #endif

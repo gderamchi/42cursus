@@ -6,7 +6,7 @@
 /*   By: guillaume_deramchi <guillaume_deramchi@    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/20 23:02:29 by guillaume_d       #+#    #+#             */
-/*   Updated: 2025/11/12 12:01:18 by guillaume_d      ###   ########.fr       */
+/*   Updated: 2025/11/13 01:53:18 by guillaume_d      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,81 +42,103 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 char	*read_file(int fd, char *buffer)
 {
 	char	*tmp;
+	char	*new_buffer;
 	int		nbytes;
 
-	tmp = malloc(BUFFER_SIZE + 1);
+	tmp = (char *)malloc(BUFFER_SIZE + 1);
+	if (!tmp)
+	{
+		free(buffer);
+		return (NULL);
+	}
 	nbytes = 1;
-	tmp[0] = '\0';
-	while (nbytes > 0 && !ft_strchr(tmp, '\n'))
+	while (nbytes > 0 && !ft_strchr(buffer, '\n'))
 	{
 		nbytes = read(fd, tmp, BUFFER_SIZE);
 		if (nbytes < 0)
-			return (NULL);
+			return (free(buffer), free(tmp), NULL);
 		tmp[nbytes] = '\0';
-		buffer = ft_strjoin(tmp, buffer);
-		if (!buffer)
-			return (NULL);
+		new_buffer = ft_strjoin(buffer, tmp);
+		if (!new_buffer)
+			return (free(buffer), free(tmp), NULL);
+		free(buffer);
+		buffer = new_buffer;
 	}
+	free(tmp);
 	return (buffer);
 }
 
+
 char	*process_line(char *buffer)
 {
-	char	*res;
-	int		i;
+	int	i;
 
+	if (!buffer || buffer[0] == '\0')
+		return (NULL);
 	i = 0;
-	res = malloc(1);
-	while (buffer[i] != '\n' && buffer[i])
+	while (buffer[i] && buffer[i] != '\n')
 		i++;
-	if (buffer[i])
+	if (buffer[i] == '\n')
 		i++;
-	res = ft_substr(buffer, 0, i);
-	if (!res)
-		return (free(res), NULL);
-	return (res);
+	return (ft_substr(buffer, 0, i));
 }
 
 char	*process_next(char *buffer)
 {
-	char	*res;
+	int	i;
 
-	res = malloc(1);
-	if (!res)
+	if (!buffer)
 		return (NULL);
-	while (*buffer != '\n' && *buffer)
-		buffer++;
-	if (*buffer)
-		buffer++;
-	res = ft_substr(buffer, 0, ft_strlen(buffer));
-	if (!res)
-		return (free(res), NULL);
-	return (res);
+	i = 0;
+	while (buffer[i] && buffer[i] != '\n')
+		i++;
+	if (buffer[i] == '\n')
+		i++;
+	if (buffer[i] == '\0')
+		return (NULL);
+	return (ft_substr(buffer, i, ft_strlen(buffer + i)));
 }
 
 char	*get_next_line(int fd)
 {
-	char		*line;
 	static char	*buffer;
+	char		*line;
+	char		*next;
 
 	if (fd < 0 || BUFFER_SIZE <= 0)
 		return (NULL);
 	if (!buffer)
 	{
-		buffer = malloc(1);
+		buffer = (char *)malloc(1);
+		if (!buffer)
+			return (NULL);
 		buffer[0] = '\0';
 	}
 	buffer = read_file(fd, buffer);
 	if (!buffer)
+	{
+		buffer = NULL;
 		return (NULL);
+	}
+	if (buffer[0] == '\0')
+	{
+		free(buffer);
+		buffer = NULL;
+		return (NULL);
+	}
 	line = process_line(buffer);
 	if (!line)
-		return (free(line), NULL);
-	buffer = process_next(buffer);
-	if (!buffer)
-		return (free(buffer), NULL);
+	{
+		free(buffer);
+		buffer = NULL;
+		return (NULL);
+	}
+	next = process_next(buffer);
+	free(buffer);
+	buffer = next;
 	return (line);
 }
+
 
 // int	main(void)
 // {

@@ -6,7 +6,7 @@
 /*   By: guillaume_deramchi <guillaume_deramchi@    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/20 23:02:41 by guillaume_d       #+#    #+#             */
-/*   Updated: 2025/11/11 21:54:18 by guillaume_d      ###   ########.fr       */
+/*   Updated: 2025/11/13 01:52:26 by guillaume_d      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,14 +62,18 @@ unsigned int	ft_strlcpy(char *dst, const char *src, unsigned int dstsize)
 char	*ft_strjoin(char const *s1, char const *s2)
 {
 	char	*res;
-	int		total;
+	int		len1;
+	int		len2;
 
-	total = ft_strlen(s1) + ft_strlen(s2) + 1;
-	res = (char *)malloc(total);
+	if (!s1 || !s2)
+		return (NULL);
+	len1 = ft_strlen(s1);
+	len2 = ft_strlen(s2);
+	res = (char *)malloc(len1 + len2 + 1);
 	if (!res)
 		return (NULL);
-	ft_strlcpy(res, s1, ft_strlen(s1) + 1);
-	ft_strlcat(res, s2, total);
+	ft_strlcpy(res, s1, len1 + 1);
+	ft_strlcat(res, s2, len1 + len2 + 1);
 	return (res);
 }
 
