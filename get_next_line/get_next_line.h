@@ -6,7 +6,7 @@
 /*   By: guillaume_deramchi <guillaume_deramchi@    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/20 23:02:26 by guillaume_d       #+#    #+#             */
-/*   Updated: 2025/11/13 01:18:52 by guillaume_d      ###   ########.fr       */
+/*   Updated: 2025/11/14 15:31:03 by guillaume_d      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,15 +20,20 @@
 #  define BUFFER_SIZE 1000000
 # endif
 
-unsigned int	ft_strlcat(char *dst, const char *src, unsigned int dstsize);
-unsigned int	ft_strlcpy(char *dst, const char *src, unsigned int dstsize);
-char			*ft_strjoin(char const *s1, char const *s2);
-int				ft_strlen(const char *str);
-char			*ft_strchr(const char *s, int c);
-char			*ft_substr(char const *s, unsigned int start, size_t len);
-char			*read_file(int fd, char *buffer);
-char			*process_line(char *buffer);
-char			*process_next(char *buffer);
-char			*get_next_line(int fd);
+typedef struct s_list
+{
+	char			*str_buf;
+	struct s_list	*next;
+}					t_list;
+int					found_nl(t_list *list);
+t_list				*find_last_node(t_list *list);
+char				*get_line(t_list *list);
+void				copy_string(t_list *list, char *str);
+int					len_to_nl(t_list *list);
+void				polish_list(t_list **list);
+void				create_list(t_list **list, int fd);
+void				append(t_list **list, char *buf);
+void				dealloc(t_list **list, t_list *clean, char *buf);
+char				*get_next_line(int fd);
 
 #endif

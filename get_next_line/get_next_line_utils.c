@@ -6,96 +6,110 @@
 /*   By: guillaume_deramchi <guillaume_deramchi@    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/20 23:02:41 by guillaume_d       #+#    #+#             */
-/*   Updated: 2025/11/13 01:52:26 by guillaume_d      ###   ########.fr       */
+/*   Updated: 2025/11/14 15:44:24 by guillaume_d      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-unsigned int	ft_strlcat(char *dst, const char *src, unsigned int dstsize)
+int	len_to_nl(t_list *list)
 {
-	unsigned int	i;
-	unsigned int	j;
-	unsigned int	srclen;
-	unsigned int	dstlen;
-	unsigned int	size;
+	int	i;
+	int	len;
 
-	i = 0;
-	j = 0;
-	srclen = ft_strlen((char *)src);
-	dstlen = ft_strlen(dst);
-	size = dstsize - dstlen - 1;
-	if (dstlen >= dstsize || dstsize == 0)
-		return (dstsize + srclen);
-	while (dst[i])
-		i++;
-	while (j < size && src[j])
+	len = 0;
+	while (list)
 	{
-		dst[i] = src[j];
-		j++;
-		i++;
+		i = 0;
+		while (list->str_buf[i])
+		{
+			if (list->str_buf[i] == '\n')
+			{
+				++len;
+				return (len);
+			}
+			i++;
+			len++;
+		}
+		list = list->next;
 	}
-	dst[i] = '\0';
-	return (srclen + dstlen);
+	return (len);
 }
 
-unsigned int	ft_strlcpy(char *dst, const char *src, unsigned int dstsize)
+void	copy_string(t_list *list, char *str)
 {
-	unsigned int	size;
-	unsigned int	i;
-	unsigned int	srclen;
+	int	i;
+	int	j;
 
-	size = dstsize - 1;
+	if (!list)
+		return ;
 	i = 0;
-	srclen = ft_strlen(src);
-	if (dstsize == 0)
-		return (srclen);
-	while (i < size && src[i])
+	while (list)
 	{
-		dst[i] = src[i];
-		i++;
+		j = 0;
+		while (list->str_buf[j])
+		{
+			if (list->str_buf[j] == '\n')
+			{
+				str[i++] = '\n';
+				str[i] = '\0';
+				return ;
+			}
+			str[i++] = list->str_buf[j++];
+		}
+		list = list->next;
 	}
-	dst[i] = '\0';
-	return (srclen);
+	str[i] = '\0';
 }
 
-char	*ft_strjoin(char const *s1, char const *s2)
+t_list	*find_last_node(t_list *list)
 {
-	char	*res;
-	int		len1;
-	int		len2;
-
-	if (!s1 || !s2)
+	if (!list)
 		return (NULL);
-	len1 = ft_strlen(s1);
-	len2 = ft_strlen(s2);
-	res = (char *)malloc(len1 + len2 + 1);
-	if (!res)
-		return (NULL);
-	ft_strlcpy(res, s1, len1 + 1);
-	ft_strlcat(res, s2, len1 + len2 + 1);
-	return (res);
+	while (list->next != NULL)
+		list = list->next;
+	return (list);
 }
 
-int	ft_strlen(const char *str)
+int	found_nl(t_list *list)
 {
 	int	i;
 
-	i = 0;
-	while (str[i])
-		i++;
-	return (i);
+	if (!list)
+		return (0);
+	while (list)
+	{
+		i = 0;
+		while (list->str_buf[i] && i < BUFFER_SIZE)
+		{
+			if (list->str_buf[i] == '\n')
+				return (1);
+			i++;
+		}
+		list = list->next;
+	}
+	return (0);
 }
 
-char	*ft_strchr(const char *s, int c)
+void	dealloc(t_list **list, t_list *clean, char *buf)
 {
-	while (*s)
+	t_list	*tmp;
+
+	if (!*list)
+		return ;
+	while (*list)
 	{
-		if ((unsigned char)*s == (unsigned char)c)
-			return ((char *)s);
-		s++;
+		tmp = (*list)->next;
+		free((*list)->str_buf);
+		free(*list);
+		*list = tmp;
 	}
-	if ((unsigned char)*s == (unsigned char)c)
-		return ((char *)s);
-	return (NULL);
+	*list = NULL;
+	if (clean->str_buf[0])
+		*list = clean;
+	else
+	{
+		free(buf);
+		free(clean);
+	}
 }

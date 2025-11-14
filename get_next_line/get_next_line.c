@@ -6,139 +6,104 @@
 /*   By: guillaume_deramchi <guillaume_deramchi@    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/20 23:02:29 by guillaume_d       #+#    #+#             */
-/*   Updated: 2025/11/13 01:53:18 by guillaume_d      ###   ########.fr       */
+/*   Updated: 2025/11/14 15:35:51 by guillaume_d      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-char	*ft_substr(char const *s, unsigned int start, size_t len)
+char	*get_line(t_list *list)
 {
-	size_t	s_len;
-	size_t	to_copy;
-	char	*res;
+	int		len;
+	char	*next_str;
 
-	if (!s)
+	if (!list)
 		return (NULL);
-	s_len = ft_strlen(s);
-	if ((size_t)start >= s_len)
-	{
-		res = (char *)malloc(1);
-		if (!res)
-			return (NULL);
-		res[0] = '\0';
-		return (res);
-	}
-	to_copy = s_len - (size_t)start;
-	if (to_copy > len)
-		to_copy = len;
-	res = (char *)malloc(to_copy + 1);
-	if (!res)
+	len = len_to_nl(list);
+	next_str = malloc(len + 1);
+	if (!next_str)
 		return (NULL);
-	ft_strlcpy(res, s + start, to_copy + 1);
-	return (res);
+	copy_string(list, next_str);
+	return (next_str);
 }
 
-char	*read_file(int fd, char *buffer)
+void	append(t_list **list, char *buf)
 {
-	char	*tmp;
-	char	*new_buffer;
+	t_list	*new;
+	t_list	*last;
+
+	last = find_last_node(*list);
+	new = malloc(sizeof(t_list));
+	if (!new)
+		return ;
+	if (!last)
+		*list = new;
+	else
+		last->next = new;
+	new->str_buf = buf;
+	new->next = NULL;
+}
+
+void	create_list(t_list **list, int fd)
+{
+	char	*buf;
 	int		nbytes;
 
-	tmp = (char *)malloc(BUFFER_SIZE + 1);
-	if (!tmp)
+	while (!found_nl(*list))
 	{
-		free(buffer);
-		return (NULL);
+		buf = malloc(BUFFER_SIZE + 1);
+		if (!buf)
+			return ;
+		nbytes = read(fd, buf, BUFFER_SIZE);
+		if (!nbytes)
+		{
+			free(buf);
+			return ;
+		}
+		buf[nbytes] = '\0';
+		append(list, buf);
 	}
-	nbytes = 1;
-	while (nbytes > 0 && !ft_strchr(buffer, '\n'))
-	{
-		nbytes = read(fd, tmp, BUFFER_SIZE);
-		if (nbytes < 0)
-			return (free(buffer), free(tmp), NULL);
-		tmp[nbytes] = '\0';
-		new_buffer = ft_strjoin(buffer, tmp);
-		if (!new_buffer)
-			return (free(buffer), free(tmp), NULL);
-		free(buffer);
-		buffer = new_buffer;
-	}
-	free(tmp);
-	return (buffer);
 }
 
-
-char	*process_line(char *buffer)
+void	polish_list(t_list **list)
 {
-	int	i;
+	t_list	*last;
+	t_list	*clean;
+	int		i;
+	int		j;
+	char	*buf;
 
-	if (!buffer || buffer[0] == '\0')
-		return (NULL);
+	buf = malloc(BUFFER_SIZE + 1);
+	clean = malloc(sizeof(t_list));
+	if (!buf || !clean)
+		return ;
+	last = find_last_node(*list);
 	i = 0;
-	while (buffer[i] && buffer[i] != '\n')
+	j = 0;
+	while (last->str_buf[i] != '\n' && last->str_buf[i])
 		i++;
-	if (buffer[i] == '\n')
-		i++;
-	return (ft_substr(buffer, 0, i));
-}
-
-char	*process_next(char *buffer)
-{
-	int	i;
-
-	if (!buffer)
-		return (NULL);
-	i = 0;
-	while (buffer[i] && buffer[i] != '\n')
-		i++;
-	if (buffer[i] == '\n')
-		i++;
-	if (buffer[i] == '\0')
-		return (NULL);
-	return (ft_substr(buffer, i, ft_strlen(buffer + i)));
+	while (last->str_buf[i] && last->str_buf[++i])
+		buf[j++] = last->str_buf[i];
+	buf[j] = '\0';
+	clean->str_buf = buf;
+	clean->next = NULL;
+	dealloc(list, clean, buf);
 }
 
 char	*get_next_line(int fd)
 {
-	static char	*buffer;
-	char		*line;
-	char		*next;
+	static t_list	*list = NULL;
+	char			*next_line;
 
-	if (fd < 0 || BUFFER_SIZE <= 0)
+	if (fd < 0 || BUFFER_SIZE <= 0 || read(fd, &next_line, 0) < 0)
 		return (NULL);
-	if (!buffer)
-	{
-		buffer = (char *)malloc(1);
-		if (!buffer)
-			return (NULL);
-		buffer[0] = '\0';
-	}
-	buffer = read_file(fd, buffer);
-	if (!buffer)
-	{
-		buffer = NULL;
+	create_list(&list, fd);
+	if (!list)
 		return (NULL);
-	}
-	if (buffer[0] == '\0')
-	{
-		free(buffer);
-		buffer = NULL;
-		return (NULL);
-	}
-	line = process_line(buffer);
-	if (!line)
-	{
-		free(buffer);
-		buffer = NULL;
-		return (NULL);
-	}
-	next = process_next(buffer);
-	free(buffer);
-	buffer = next;
-	return (line);
+	next_line = get_line(list);
+	polish_list(&list);
+	return (next_line);
 }
-
 
 // int	main(void)
 // {
