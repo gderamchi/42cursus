@@ -6,7 +6,7 @@
 /*   By: guillaume_deramchi <guillaume_deramchi@    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/17 10:26:09 by guillaume_d       #+#    #+#             */
-/*   Updated: 2025/11/21 13:39:37 by guillaume_d      ###   ########.fr       */
+/*   Updated: 2025/11/24 11:27:19 by guillaume_d      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,12 @@ void	ft_putchar_fd(char c, int fd, int *size)
 
 void	ft_putstr_fd(char *s, int fd, int *size)
 {
+	if (s == NULL)
+	{
+		write(fd, "(null)", 6);
+		*size += 6;
+		return ;
+	}
 	while (*s)
 	{
 		write(fd, s++, 1);
@@ -37,10 +43,10 @@ int	ft_strlen(char *str)
 	return (i);
 }
 
-void	ft_putnbr_base(unsigned long long n, char *base, int *size)
+void	ft_putnbr_base(long long n, char *base, int *size)
 {
-	unsigned long long	nb;
-	int					baselen;
+	long long	nb;
+	long long	baselen;
 
 	baselen = ft_strlen(base);
 	nb = n;
@@ -49,7 +55,7 @@ void	ft_putnbr_base(unsigned long long n, char *base, int *size)
 		ft_putchar_fd('-', 1, size);
 		nb = -nb;
 	}
-	if (nb >= 16)
+	if (nb >= baselen)
 		ft_putnbr_base(nb / baselen, base, size);
 	ft_putchar_fd(base[nb % baselen], 1, size);
 }
@@ -60,5 +66,6 @@ void	ft_putptr(void *ptr, int *size)
 
 	address = (unsigned long long)ptr;
 	write(1, "0x", 2);
-	ft_putnbr_base(address, "0123456789ABCDEF", size);
+	(*size) += 2;
+	ft_putnbr_base_unsigned(address, "0123456789abcdef", size);
 }

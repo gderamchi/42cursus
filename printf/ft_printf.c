@@ -6,33 +6,43 @@
 /*   By: guillaume_deramchi <guillaume_deramchi@    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/13 03:20:18 by guillaume_d       #+#    #+#             */
-/*   Updated: 2025/11/21 15:10:54 by guillaume_d      ###   ########.fr       */
+/*   Updated: 2025/11/24 11:27:30 by guillaume_d      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int	detect(va_list *args, const char *tmp, int *size)
+void	ft_putnbr_base_unsigned(unsigned long long n, char *base, int *size)
+{
+	unsigned long long	baselen;
+
+	baselen = ft_strlen(base);
+	if (n >= baselen)
+		ft_putnbr_base_unsigned(n / baselen, base, size);
+	ft_putchar_fd(base[n % baselen], 1, size);
+}
+
+void	detect(va_list *args, const char *tmp, int *size)
 {
 	if (*tmp == 'c')
 		ft_putchar_fd(va_arg(*args, int), 1, size);
 	else if (*tmp == 's')
 		ft_putstr_fd(va_arg(*args, char *), 1, size);
 	else if (*tmp == 'p')
-		ft_putptr(va_arg(*args, char *), size);
+		ft_putptr(va_arg(*args, void *), size);
 	else if (*tmp == 'd' || *tmp == 'i')
-		ft_putnbr_base(va_arg(*args, unsigned long long), "0123456789", size);
+		ft_putnbr_base((long long)va_arg(*args, int), "0123456789", size);
 	else if (*tmp == 'x')
-		ft_putnbr_base(va_arg(*args, unsigned long long), "0123456789abcdef",
-			size);
+		ft_putnbr_base_unsigned((unsigned long long)va_arg(*args, unsigned int),
+			"0123456789abcdef", size);
 	else if (*tmp == 'u')
-		ft_putnbr_base(va_arg(*args, unsigned long long), "0123456789", size);
+		ft_putnbr_base_unsigned((unsigned long long)va_arg(*args, unsigned int),
+			"0123456789", size);
 	else if (*tmp == 'X')
-		ft_putnbr_base(va_arg(*args, unsigned long long), "0123456789ABCDEF",
-			size);
-	else if (*tmp == '%' && *(++size))
+		ft_putnbr_base_unsigned((unsigned long long)va_arg(*args, unsigned int),
+			"0123456789ABCDEF", size);
+	else if (*tmp == '%' && ++(*size))
 		write(1, "%", 1);
-	return (*size);
 }
 
 int	ft_printf(const char *tmp, ...)
@@ -47,19 +57,24 @@ int	ft_printf(const char *tmp, ...)
 		if (*tmp == '%')
 		{
 			tmp++;
-			len += detect(&args, tmp, &len);
+			detect(&args, tmp, &len);
 		}
 		else
+		{
 			write(1, tmp, 1);
-		len++;
+			len++;
+		}
 		tmp++;
 	}
 	va_end(args);
 	return (len);
 }
 
-int	main(void)
-{
-	ft_printf("%c", 'd');
-	return (0);
-}
+// int	main(void)
+// {
+// 	// int *p;
+// 	// int i = 0;
+// 	// p = &i;
+// 	printf("%d", ft_printf(" %p ", -1));
+// 	return (0);
+// }
