@@ -6,7 +6,7 @@
 /*   By: guillaume_deramchi <guillaume_deramchi@    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/28 12:40:20 by guillaume_d       #+#    #+#             */
-/*   Updated: 2025/12/03 17:11:55 by guillaume_d      ###   ########.fr       */
+/*   Updated: 2025/12/03 23:06:55 by guillaume_d      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,5 +50,9 @@ int					ft_printf(const char *tmp, ...);
 void				detect(va_list *args, const char *tmp, int *size);
 void				ft_putnbr_base_unsigned(unsigned long long n, char *base,
 						int *size);
+void				rra(t_list **stack_a);
+void				sa(t_list **stack_a);
+void				sort_three(t_list **stack_a);
+void				sort_five(t_list **stack_a, t_list **stack_b);
 
 #endif

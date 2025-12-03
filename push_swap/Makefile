@@ -3,7 +3,13 @@ CC          = cc
 CFLAGS      = -Wall -Wextra -Werror
 RM          = rm -f
 
-SRCS        = ope.c ope2.c printf_utils.c push_swap.c utils.c ft_printf.c
+SRCS        = push_swap.c \
+              ps_utils.c \
+              ps_utils2.c \
+              ps_utils3.c \
+              ft_printf.c \
+              printf_utils.c \
+			  ps_utils4.c
 
 OBJS        = $(SRCS:.c=.o)
 

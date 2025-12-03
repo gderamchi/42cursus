@@ -6,7 +6,7 @@
 /*   By: guillaume_deramchi <guillaume_deramchi@    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/28 12:40:22 by guillaume_d       #+#    #+#             */
-/*   Updated: 2025/12/03 17:11:26 by guillaume_d      ###   ########.fr       */
+/*   Updated: 2025/12/03 23:07:27 by guillaume_d      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,13 +98,23 @@ void	index_stack(t_list **stack)
 int	main(int ac, char **av)
 {
 	t_list	*stack_a;
-	t_list *stack_b;
+	t_list	*stack_b;
 
 	stack_b = NULL;
 	stack_a = create_stack(ac, av);
 	if (is_sorted(stack_a))
-		return 0;
+		return (0);
 	index_stack(&stack_a);
+	if (ac == 4)
+	{
+		sort_three(&stack_a);
+		return (0);
+	}
+	if (ac == 6)
+	{
+		sort_five(&stack_a, &stack_b);
+		return (0);
+	}
 	radix_sort(&stack_a, &stack_b);
 	return (0);
 }
