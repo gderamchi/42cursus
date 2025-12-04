@@ -6,13 +6,14 @@
 /*   By: guillaume_deramchi <guillaume_deramchi@    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/28 12:40:20 by guillaume_d       #+#    #+#             */
-/*   Updated: 2025/12/03 23:06:55 by guillaume_d      ###   ########.fr       */
+/*   Updated: 2025/12/04 12:26:20 by guillaume_d      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PUSH_SWAP_H
 # define PUSH_SWAP_H
 # include <fcntl.h>
+# include <limits.h>
 # include <stdarg.h>
 # include <stdio.h>
 # include <stdlib.h>
@@ -54,5 +55,7 @@ void				rra(t_list **stack_a);
 void				sa(t_list **stack_a);
 void				sort_three(t_list **stack_a);
 void				sort_five(t_list **stack_a, t_list **stack_b);
+int					error_handling(t_list **stack_a, int ac, char **av);
+int					check_int(int ac, char **av);
 
 #endif

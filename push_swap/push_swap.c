@@ -6,7 +6,7 @@
 /*   By: guillaume_deramchi <guillaume_deramchi@    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/28 12:40:22 by guillaume_d       #+#    #+#             */
-/*   Updated: 2025/12/03 23:07:27 by guillaume_d      ###   ########.fr       */
+/*   Updated: 2025/12/04 11:31:37 by guillaume_d      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,6 +102,8 @@ int	main(int ac, char **av)
 
 	stack_b = NULL;
 	stack_a = create_stack(ac, av);
+	if (error_handling(&stack_a, ac, av))
+		return (0);
 	if (is_sorted(stack_a))
 		return (0);
 	index_stack(&stack_a);
