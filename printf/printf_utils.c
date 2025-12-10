@@ -6,7 +6,7 @@
 /*   By: guillaume_deramchi <guillaume_deramchi@    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/17 10:26:09 by guillaume_d       #+#    #+#             */
-/*   Updated: 2025/11/24 11:27:19 by guillaume_d      ###   ########.fr       */
+/*   Updated: 2025/11/24 12:01:20 by guillaume_d      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,12 @@ void	ft_putptr(void *ptr, int *size)
 	unsigned long long	address;
 
 	address = (unsigned long long)ptr;
+	if (ptr == NULL)
+	{
+		write(1, "(nil)", 5);
+		*size += 5;
+		return ;
+	}
 	write(1, "0x", 2);
 	(*size) += 2;
 	ft_putnbr_base_unsigned(address, "0123456789abcdef", size);

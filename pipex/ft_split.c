@@ -6,7 +6,7 @@
 /*   By: guillaume_deramchi <guillaume_deramchi@    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/05 11:32:56 by guillaume_d       #+#    #+#             */
-/*   Updated: 2025/12/05 11:33:09 by guillaume_d      ###   ########.fr       */
+/*   Updated: 2025/12/10 14:33:53 by guillaume_d      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ static char	**result(char **res, char const *s, char c)
 		{
 			res[j] = (char *)malloc(sizeof(char) * (len + 1));
 			if (!res[j])
-				return (NULL);
+				return (free_split(res), NULL);
 			i -= len;
 			ft_strlcpy(res[j++], &s[i], len + 1);
 		}
