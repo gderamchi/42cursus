@@ -9,18 +9,17 @@ OBJS    = $(SRCS:.c=.o)
 all: $(NAME)
 
 $(NAME): $(OBJS)
-    $(CC) $(CFLAGS) $(OBJS) -o $(NAME)
+	$(CC) $(CFLAGS) $(OBJS) -o $(NAME)
 
 %.o: %.c
-    $(CC) $(CFLAGS) -c $< -o $@
+	$(CC) $(CFLAGS) -c $< -o $@
 
 clean:
-    $(RM) $(OBJS)
+	$(RM) $(OBJS)
 
 fclean: clean
-    $(RM) $(NAME)
+	$(RM) $(NAME)
 
 re: fclean all
 
 .PHONY: all clean fclean re
-EOF

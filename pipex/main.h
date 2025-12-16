@@ -6,7 +6,7 @@
 /*   By: guillaume_deramchi <guillaume_deramchi@    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/05 09:38:00 by guillaume_d       #+#    #+#             */
-/*   Updated: 2025/12/10 15:59:51 by guillaume_d      ###   ########.fr       */
+/*   Updated: 2025/12/15 16:51:01 by guillaume_d      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ char *find_path(char **envp, char *cmd);
 int verify_ffile(char **av);
 int main(int ac, char **av, char **envp);
 void execute(char **envp, char *cmd);
+void open_outfile(int ac, char **av, int *outfile);
 
 // printf functions
 void ft_putchar_fd(char c, int fd, int *size);
