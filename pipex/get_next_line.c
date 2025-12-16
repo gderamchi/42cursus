@@ -6,7 +6,7 @@
 /*   By: guillaume_deramchi <guillaume_deramchi@    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/20 23:02:29 by guillaume_d       #+#    #+#             */
-/*   Updated: 2025/11/14 16:00:59 by guillaume_d      ###   ########.fr       */
+/*   Updated: 2025/12/16 13:43:58 by guillaume_d      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ void	create_list(t_list **list, int fd)
 		if (!buf)
 			return ;
 		nbytes = read(fd, buf, BUFFER_SIZE);
-		if (!nbytes)
+		if (nbytes <= 0)
 		{
 			free(buf);
 			return ;
@@ -73,14 +73,19 @@ void	polish_list(t_list **list)
 	int		j;
 	char	*buf;
 
+	if (!*list || !found_nl(*list))
+	{
+		free_list(list);
+		return ;
+	}
 	buf = malloc(BUFFER_SIZE + 1);
 	clean = malloc(sizeof(t_list));
 	if (!buf || !clean)
-		return ;
+		return (free(buf), free(clean));
 	last = find_last_node(*list);
 	i = 0;
 	j = 0;
-	while (last->str_buf[i] != '\n' && last->str_buf[i])
+	while (last->str_buf[i] && last->str_buf[i] != '\n')
 		i++;
 	while (last->str_buf[i] && last->str_buf[++i])
 		buf[j++] = last->str_buf[i];

@@ -6,15 +6,15 @@
 /*   By: guillaume_deramchi <guillaume_deramchi@    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/15 16:01:52 by guillaume_d       #+#    #+#             */
-/*   Updated: 2025/12/15 17:05:48 by guillaume_d      ###   ########.fr       */
+/*   Updated: 2025/12/16 12:46:20 by guillaume_d      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "main.h"
 
-char *extract_path(char **envp)
+char	*extract_path(char **envp)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (envp[i] && ft_strncmp(envp[i], "PATH=", 5) != 0)
@@ -24,12 +24,12 @@ char *extract_path(char **envp)
 	return (envp[i] + 5);
 }
 
-void free_split(char **str)
+void	free_split(char **str)
 {
-	int i;
+	int	i;
 
 	if (!str)
-		return;
+		return ;
 	i = 0;
 	while (str[i])
 	{
@@ -39,13 +39,13 @@ void free_split(char **str)
 	free(str);
 }
 
-char *find_path(char **envp, char *cmd)
+char	*find_path(char **envp, char *cmd)
 {
-	int i;
-	char *path_value;
-	char **paths;
-	char *tmp;
-	char *full;
+	int		i;
+	char	*path_value;
+	char	**paths;
+	char	*tmp;
+	char	*full;
 
 	path_value = extract_path(envp);
 	if (!path_value)
@@ -65,10 +65,10 @@ char *find_path(char **envp, char *cmd)
 		free(full);
 	}
 	free_split(paths);
-	exit(126);
+	return (NULL);
 }
 
-int verify_ffile(char **av)
+int	verify_ffile(char **av)
 {
 	if (access(av[1], R_OK) < 0)
 	{
@@ -78,7 +78,7 @@ int verify_ffile(char **av)
 	return (0);
 }
 
-void open_outfile(int ac, char **av, int *outfile)
+void	open_outfile(int ac, char **av, int *outfile)
 {
 	if (ft_strncmp(av[1], "here_doc", 8) == 0)
 	{

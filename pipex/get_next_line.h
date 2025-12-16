@@ -6,7 +6,7 @@
 /*   By: guillaume_deramchi <guillaume_deramchi@    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/20 23:02:26 by guillaume_d       #+#    #+#             */
-/*   Updated: 2025/11/14 15:31:03 by guillaume_d      ###   ########.fr       */
+/*   Updated: 2025/12/16 16:40:22 by guillaume_d      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 # include <stdlib.h>
 # include <unistd.h>
 # ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 1000000
+#  define BUFFER_SIZE 1024
 # endif
 
 typedef struct s_list
@@ -35,5 +35,6 @@ void				create_list(t_list **list, int fd);
 void				append(t_list **list, char *buf);
 void				dealloc(t_list **list, t_list *clean, char *buf);
 char				*get_next_line(int fd);
+void				free_list(t_list **list);
 
 #endif

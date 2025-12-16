@@ -6,15 +6,15 @@
 /*   By: guillaume_deramchi <guillaume_deramchi@    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/05 09:37:55 by guillaume_d       #+#    #+#             */
-/*   Updated: 2025/12/10 15:22:53 by guillaume_d      ###   ########.fr       */
+/*   Updated: 2025/12/16 13:43:17 by guillaume_d      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "main.h"
 
-int ft_strncmp(const char *s1, const char *s2, int n)
+int	ft_strncmp(const char *s1, const char *s2, int n)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	if (n == 0)
@@ -26,10 +26,10 @@ int ft_strncmp(const char *s1, const char *s2, int n)
 	return ((unsigned const char)s1[i] - (unsigned const char)s2[i]);
 }
 
-char *ft_strjoin(char const *s1, char const *s2)
+char	*ft_strjoin(char const *s1, char const *s2)
 {
-	char *res;
-	int total;
+	char	*res;
+	int		total;
 
 	total = ft_strlen((char *)s1) + ft_strlen((char *)s2) + 1;
 	res = (char *)malloc(total + 1);
@@ -40,13 +40,13 @@ char *ft_strjoin(char const *s1, char const *s2)
 	return (res);
 }
 
-unsigned int ft_strlcat(char *dst, const char *src, unsigned int dstsize)
+unsigned int	ft_strlcat(char *dst, const char *src, unsigned int dstsize)
 {
-	unsigned int i;
-	unsigned int j;
-	unsigned int srclen;
-	unsigned int dstlen;
-	unsigned int size;
+	unsigned int	i;
+	unsigned int	j;
+	unsigned int	srclen;
+	unsigned int	dstlen;
+	unsigned int	size;
 
 	i = 0;
 	j = 0;
@@ -67,11 +67,11 @@ unsigned int ft_strlcat(char *dst, const char *src, unsigned int dstsize)
 	return (srclen + dstlen);
 }
 
-unsigned int ft_strlcpy(char *dst, const char *src, unsigned int dstsize)
+unsigned int	ft_strlcpy(char *dst, const char *src, unsigned int dstsize)
 {
-	unsigned int size;
-	unsigned int i;
-	unsigned int srclen;
+	unsigned int	size;
+	unsigned int	i;
+	unsigned int	srclen;
 
 	size = dstsize - 1;
 	i = 0;
@@ -87,18 +87,22 @@ unsigned int ft_strlcpy(char *dst, const char *src, unsigned int dstsize)
 	return (srclen);
 }
 
-void execute(char **envp, char *cmd)
+void	execute(char **envp, char *cmd)
 {
-	char *cmd_path;
-	char **cmd_args;
+	char	*cmd_path;
+	char	**cmd_args;
 
-	cmd_path = find_path(envp, cmd);
 	cmd_args = ft_split(cmd, ' ');
+	if (!cmd_args || !cmd_args[0])
+		cmd_error(cmd_args, cmd);
+	cmd_path = find_path(envp, cmd_args[0]);
+	if (!cmd_path)
+		cmd_error(cmd_args, cmd_args[0]);
 	if (execve(cmd_path, cmd_args, envp) == -1)
 	{
-		if (cmd_path)
-			free(cmd_path);
+		free(cmd_path);
 		if (cmd_args)
 			free_split(cmd_args);
+		exit(127);
 	}
 }
