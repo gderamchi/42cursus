@@ -6,7 +6,7 @@
 /*   By: guillaume_deramchi <guillaume_deramchi@    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/05 09:37:53 by guillaume_d       #+#    #+#             */
-/*   Updated: 2025/12/16 12:47:02 by guillaume_d      ###   ########.fr       */
+/*   Updated: 2025/12/16 17:09:47 by guillaume_d      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,12 +81,20 @@ int	open_inf(char **av, int ac, int *i)
 
 int	main(int ac, char **av, char **envp)
 {
-	pid_t	pids[256];
+	pid_t	*pids;
 	int		cmds;
+	int		cmd_count;
 
 	if (ac < 5)
 		return (EXIT_FAILURE);
+	cmd_count = ac - 3;
+	if (ft_strncmp(av[1], "here_doc", 8) == 0)
+		cmd_count = ac - 4;
+	pids = malloc(sizeof(pid_t) * cmd_count);
+	if (!pids)
+		return (EXIT_FAILURE);
 	cmds = launch_pipeline(ac, av, envp, pids);
 	wait_children(pids, cmds);
+	free(pids);
 	return (0);
 }
