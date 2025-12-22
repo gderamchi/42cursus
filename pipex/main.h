@@ -27,15 +27,16 @@ void				free_split(char **str);
 char				*find_path(char **envp, char *cmd);
 int					verify_ffile(char **av);
 int					main(int ac, char **av, char **envp);
-void				execute(char **envp, char *cmd);
+void				execute(char **envp, char *cmd, pid_t *pids);
 void				open_outfile(int ac, char **av, int *outfile);
 int					get_here_doc(char *limiter);
 int					open_inf(char **av, int ac, int *i);
-pid_t				spawn_child(char *cmd, char **envp, int in_fd, int out_fd);
+pid_t				spawn_child(char *cmd, char **envp, int in_fd, int out_fd,
+						pid_t *pids);
 void				wait_children(pid_t *pids, int count);
 int					launch_pipeline(int ac, char **av, char **envp,
 						pid_t *pids);
-void				cmd_error(char **cmd_args, char *cmd);
+void				cmd_error(char **cmd_args, char *cmd, pid_t *pids);
 
 // printf functions
 void				ft_putchar_fd(char c, int fd, int *size);

@@ -12,7 +12,7 @@
 
 #include "main.h"
 
-pid_t	spawn_child(char *cmd, char **envp, int in_fd, int out_fd)
+pid_t	spawn_child(char *cmd, char **envp, int in_fd, int out_fd, pid_t *pids)
 {
 	pid_t	pid;
 
@@ -22,10 +22,13 @@ pid_t	spawn_child(char *cmd, char **envp, int in_fd, int out_fd)
 	if (pid == 0)
 	{
 		if (dup2(in_fd, STDIN_FILENO) == -1 || dup2(out_fd, 1) == -1)
+		{
+			free(pids);
 			exit(EXIT_FAILURE);
+		}
 		close(in_fd);
 		close(out_fd);
-		execute(envp, cmd);
+		execute(envp, cmd, pids);
 	}
 	return (pid);
 }
@@ -55,14 +58,14 @@ int	launch_pipeline(int ac, char **av, char **envp, pid_t *pids)
 	{
 		if (pipe(fd) == -1)
 			exit(EXIT_FAILURE);
-		pids[cmds++] = spawn_child(av[i], envp, in_fd, fd[1]);
+		pids[cmds++] = spawn_child(av[i], envp, in_fd, fd[1], pids);
 		close(fd[1]);
 		close(in_fd);
 		in_fd = fd[0];
 		i++;
 	}
 	open_outfile(ac, av, &fd[1]);
-	pids[cmds++] = spawn_child(av[ac - 2], envp, in_fd, fd[1]);
+	pids[cmds++] = spawn_child(av[ac - 2], envp, in_fd, fd[1], pids);
 	close(in_fd);
 	close(fd[1]);
 	return (cmds);
@@ -81,10 +84,13 @@ void	free_list(t_list **list)
 	}
 }
 
-void	cmd_error(char **cmd_args, char *cmd)
+void	cmd_error(char **cmd_args, char *cmd, pid_t *pids)
 {
-	if (cmd_args)
+	if (cmd_args && cmd_args[0])
 		ft_printf("command not found: %s\n", cmd);
+	else
+		ft_printf("command not found: \n");
 	free_split(cmd_args);
+	free(pids);
 	exit(127);
 }
