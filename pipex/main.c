@@ -84,7 +84,6 @@ int	main(int ac, char **av, char **envp)
 	pid_t	*pids;
 	int		cmds;
 	int		cmd_count;
-	int		status;
 
 	if (ac < 5)
 		return (EXIT_FAILURE);
@@ -95,7 +94,7 @@ int	main(int ac, char **av, char **envp)
 	if (!pids)
 		return (EXIT_FAILURE);
 	cmds = launch_pipeline(ac, av, envp, pids);
-	status = wait_children(pids, cmds);
+	wait_children(pids, cmds);
 	free(pids);
-	return (status);
+	return (0);
 }

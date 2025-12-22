@@ -32,7 +32,7 @@ void				open_outfile(int ac, char **av, int *outfile);
 int					get_here_doc(char *limiter);
 int					open_inf(char **av, int ac, int *i);
 pid_t				spawn_child(char *cmd, char **envp, int in_fd, int out_fd);
-int					wait_children(pid_t *pids, int count);
+void				wait_children(pid_t *pids, int count);
 int					launch_pipeline(int ac, char **av, char **envp,
 						pid_t *pids);
 void				cmd_error(char **cmd_args, char *cmd);

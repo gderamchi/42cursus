@@ -84,7 +84,7 @@ void	free_list(t_list **list)
 void	cmd_error(char **cmd_args, char *cmd)
 {
 	if (cmd_args)
-		free_split(cmd_args);
-	ft_printf("command not found: %s\n", cmd);
+		ft_printf("command not found: %s\n", cmd);
+	free_split(cmd_args);
 	exit(127);
 }

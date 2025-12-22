@@ -73,11 +73,6 @@ void	polish_list(t_list **list)
 	int		j;
 	char	*buf;
 
-	if (!*list || !found_nl(*list))
-	{
-		free_list(list);
-		return ;
-	}
 	buf = malloc(BUFFER_SIZE + 1);
 	clean = malloc(sizeof(t_list));
 	if (!buf || !clean)

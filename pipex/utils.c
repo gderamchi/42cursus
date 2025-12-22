@@ -101,6 +101,7 @@ void	execute(char **envp, char *cmd)
 	if (execve(cmd_path, cmd_args, envp) == -1)
 	{
 		free(cmd_path);
+		cmd_error(cmd_args, cmd_args[0]);
 		if (cmd_args)
 			free_split(cmd_args);
 		exit(127);
