@@ -27,6 +27,9 @@ typedef struct s_pipex
 	char			**av;
 	char			**envp;
 	pid_t			*pids;
+	int				in_fd;
+	int				out_fd;
+	int				pipe_fd[2];
 }					t_pipex;
 
 // pipex functions
@@ -36,13 +39,14 @@ char				*find_path(char **envp, char *cmd);
 int					verify_ffile(char **av);
 int					main(int ac, char **av, char **envp);
 void				execute(char *cmd, t_pipex *px);
-void				open_outfile(int ac, char **av, int *outfile);
+void				open_outfile(t_pipex *px);
 int					get_here_doc(char *limiter);
-int					open_inf(char **av, int ac, int *i);
-pid_t				spawn_child(char *cmd, int in_fd, int out_fd, t_pipex *px);
+int					open_inf(t_pipex *px, int *i);
+pid_t				spawn_child(char *cmd, t_pipex *px, int is_last);
 void				wait_children(pid_t *pids, int count);
 int					launch_pipeline(t_pipex *px);
 void				cmd_error(char **cmd_args, char *cmd, t_pipex *px);
+void				cleanup_px(t_pipex *px);
 
 // printf functions
 void				ft_putchar_fd(char c, int fd, int *size);

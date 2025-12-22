@@ -61,22 +61,20 @@ int	get_here_doc(char *limiter)
 	return (fd[0]);
 }
 
-int	open_inf(char **av, int ac, int *i)
+int	open_inf(t_pipex *px, int *i)
 {
-	int	infile;
-
-	if (ft_strncmp(av[1], "here_doc", 8) == 0)
+	if (ft_strncmp(px->av[1], "here_doc", 8) == 0)
 	{
-		if (ac < 6)
-			exit(EXIT_FAILURE);
+		if (px->ac < 6)
+			cleanup_px(px);
 		*i = 3;
-		return (get_here_doc(av[2]));
+		return (get_here_doc(px->av[2]));
 	}
 	*i = 2;
-	infile = open(av[1], O_RDONLY);
-	if (infile < 0)
-		exit(EXIT_FAILURE);
-	return (infile);
+	px->in_fd = open(px->av[1], O_RDONLY);
+	if (px->in_fd < 0)
+		cleanup_px(px);
+	return (px->in_fd);
 }
 
 int	main(int ac, char **av, char **envp)
@@ -96,6 +94,10 @@ int	main(int ac, char **av, char **envp)
 	px.ac = ac;
 	px.av = av;
 	px.envp = envp;
+	px.in_fd = -1;
+	px.out_fd = -1;
+	px.pipe_fd[0] = -1;
+	px.pipe_fd[1] = -1;
 	cmds = launch_pipeline(&px);
 	wait_children(px.pids, cmds);
 	free(px.pids);

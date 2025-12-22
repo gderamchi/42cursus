@@ -6,7 +6,7 @@
 /*   By: guillaume_deramchi <guillaume_deramchi@    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/15 16:01:52 by guillaume_d       #+#    #+#             */
-/*   Updated: 2025/12/16 12:46:20 by guillaume_d      ###   ########.fr       */
+/*   Updated: 2025/12/22 18:24:56 by guillaume_d      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,18 +78,20 @@ int	verify_ffile(char **av)
 	return (0);
 }
 
-void	open_outfile(int ac, char **av, int *outfile)
+void	open_outfile(t_pipex *px)
 {
-	if (ft_strncmp(av[1], "here_doc", 8) == 0)
+	if (ft_strncmp(px->av[1], "here_doc", 8) == 0)
 	{
-		*outfile = open(av[ac - 1], O_WRONLY | O_APPEND | O_CREAT, 0644);
-		if (*outfile < 0)
-			exit(EXIT_FAILURE);
+		px->out_fd = open(px->av[px->ac - 1], O_WRONLY | O_APPEND | O_CREAT,
+				0644);
+		if (px->out_fd < 0)
+			cleanup_px(px);
 	}
 	else
 	{
-		*outfile = open(av[ac - 1], O_WRONLY | O_TRUNC | O_CREAT, 0644);
-		if (*outfile < 0)
-			exit(EXIT_FAILURE);
+		px->out_fd = open(px->av[px->ac - 1], O_WRONLY | O_TRUNC | O_CREAT,
+				0644);
+		if (px->out_fd < 0)
+			cleanup_px(px);
 	}
 }
