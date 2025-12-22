@@ -6,7 +6,7 @@
 /*   By: guillaume_deramchi <guillaume_deramchi@    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/05 09:37:53 by guillaume_d       #+#    #+#             */
-/*   Updated: 2025/12/16 17:09:47 by guillaume_d      ###   ########.fr       */
+/*   Updated: 2025/12/22 11:20:01 by guillaume_d      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,6 +84,7 @@ int	main(int ac, char **av, char **envp)
 	pid_t	*pids;
 	int		cmds;
 	int		cmd_count;
+	int		status;
 
 	if (ac < 5)
 		return (EXIT_FAILURE);
@@ -94,7 +95,7 @@ int	main(int ac, char **av, char **envp)
 	if (!pids)
 		return (EXIT_FAILURE);
 	cmds = launch_pipeline(ac, av, envp, pids);
-	wait_children(pids, cmds);
+	status = wait_children(pids, cmds);
 	free(pids);
-	return (0);
+	return (status);
 }

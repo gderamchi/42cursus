@@ -6,12 +6,13 @@
 /*   By: guillaume_deramchi <guillaume_deramchi@    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/05 09:38:00 by guillaume_d       #+#    #+#             */
-/*   Updated: 2025/12/16 16:40:28 by guillaume_d      ###   ########.fr       */
+/*   Updated: 2025/12/22 11:14:39 by guillaume_d      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MAIN_H
 # define MAIN_H
+# include <errno.h>
 # include <fcntl.h>
 # include <stdarg.h>
 # include <stdio.h>
@@ -31,7 +32,7 @@ void				open_outfile(int ac, char **av, int *outfile);
 int					get_here_doc(char *limiter);
 int					open_inf(char **av, int ac, int *i);
 pid_t				spawn_child(char *cmd, char **envp, int in_fd, int out_fd);
-void				wait_children(pid_t *pids, int count);
+int					wait_children(pid_t *pids, int count);
 int					launch_pipeline(int ac, char **av, char **envp,
 						pid_t *pids);
 void				cmd_error(char **cmd_args, char *cmd);
