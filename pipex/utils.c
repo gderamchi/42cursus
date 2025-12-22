@@ -87,20 +87,20 @@ unsigned int	ft_strlcpy(char *dst, const char *src, unsigned int dstsize)
 	return (srclen);
 }
 
-void	execute(char **envp, char *cmd, pid_t *pids)
+void	execute(char *cmd, t_pipex *px)
 {
 	char	*cmd_path;
 	char	**cmd_args;
 
 	cmd_args = ft_split(cmd, ' ');
 	if (!cmd_args || !cmd_args[0])
-		cmd_error(cmd_args, cmd, pids);
-	cmd_path = find_path(envp, cmd_args[0]);
+		cmd_error(cmd_args, cmd, px);
+	cmd_path = find_path(px->envp, cmd_args[0]);
 	if (!cmd_path)
-		cmd_error(cmd_args, cmd_args[0], pids);
-	if (execve(cmd_path, cmd_args, envp) == -1)
+		cmd_error(cmd_args, cmd_args[0], px);
+	if (execve(cmd_path, cmd_args, px->envp) == -1)
 	{
 		free(cmd_path);
-		cmd_error(cmd_args, cmd_args[0], pids);
+		cmd_error(cmd_args, cmd_args[0], px);
 	}
 }

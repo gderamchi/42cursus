@@ -31,7 +31,7 @@ void	here_doc_child(char *limiter, int *fd)
 	close(fd[0]);
 	while (1)
 	{
-		ft_printf("here_doc>");
+		write(2, "here_doc>", 9);
 		line = get_next_line(STDIN_FILENO);
 		if (is_limiter(line, limiter))
 		{
@@ -81,7 +81,7 @@ int	open_inf(char **av, int ac, int *i)
 
 int	main(int ac, char **av, char **envp)
 {
-	pid_t	*pids;
+	t_pipex	px;
 	int		cmds;
 	int		cmd_count;
 
@@ -90,11 +90,14 @@ int	main(int ac, char **av, char **envp)
 	cmd_count = ac - 3;
 	if (ft_strncmp(av[1], "here_doc", 8) == 0)
 		cmd_count = ac - 4;
-	pids = malloc(sizeof(pid_t) * cmd_count);
-	if (!pids)
+	px.pids = malloc(sizeof(pid_t) * cmd_count);
+	if (!px.pids)
 		return (EXIT_FAILURE);
-	cmds = launch_pipeline(ac, av, envp, pids);
-	wait_children(pids, cmds);
-	free(pids);
+	px.ac = ac;
+	px.av = av;
+	px.envp = envp;
+	cmds = launch_pipeline(&px);
+	wait_children(px.pids, cmds);
+	free(px.pids);
 	return (0);
 }
