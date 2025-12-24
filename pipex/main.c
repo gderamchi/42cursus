@@ -24,11 +24,10 @@ static int	is_limiter(char *line, char *limiter)
 	return (0);
 }
 
-void	here_doc_child(char *limiter, int *fd)
+static void	write_here_doc(char *limiter, int fd)
 {
 	char	*line;
 
-	close(fd[0]);
 	while (1)
 	{
 		write(2, "here_doc>", 9);
@@ -36,29 +35,28 @@ void	here_doc_child(char *limiter, int *fd)
 		if (is_limiter(line, limiter))
 		{
 			free(line);
-			close(fd[1]);
-			exit(EXIT_SUCCESS);
+			break ;
 		}
-		write(fd[1], line, ft_strlen(line));
+		write(fd, line, ft_strlen(line));
 		free(line);
 	}
 }
 
 int	get_here_doc(char *limiter)
 {
-	int		fd[2];
-	pid_t	pid;
+	int		fd;
 
-	if (pipe(fd) == -1)
+	fd = open(".heredoc_tmp", O_WRONLY | O_CREAT | O_TRUNC, 0644);
+	if (fd < 0)
 		exit(EXIT_FAILURE);
-	pid = fork();
-	if (pid == -1)
+	write_here_doc(limiter, fd);
+	gnl_clear();
+	close(fd);
+	fd = open(".heredoc_tmp", O_RDONLY);
+	if (fd < 0)
 		exit(EXIT_FAILURE);
-	if (pid == 0)
-		here_doc_child(limiter, fd);
-	close(fd[1]);
-	waitpid(pid, NULL, 0);
-	return (fd[0]);
+	unlink(".heredoc_tmp");
+	return (fd);
 }
 
 int	open_inf(t_pipex *px, int *i)
@@ -73,7 +71,10 @@ int	open_inf(t_pipex *px, int *i)
 	*i = 2;
 	px->in_fd = open(px->av[1], O_RDONLY);
 	if (px->in_fd < 0)
-		cleanup_px(px);
+	{
+		perror(px->av[1]);
+		px->in_fd = open("/dev/null", O_RDONLY);
+	}
 	return (px->in_fd);
 }
 
@@ -82,6 +83,7 @@ int	main(int ac, char **av, char **envp)
 	t_pipex	px;
 	int		cmds;
 	int		cmd_count;
+	int		exit_status;
 
 	if (ac < 5)
 		return (EXIT_FAILURE);
@@ -99,7 +101,7 @@ int	main(int ac, char **av, char **envp)
 	px.pipe_fd[0] = -1;
 	px.pipe_fd[1] = -1;
 	cmds = launch_pipeline(&px);
-	wait_children(px.pids, cmds);
+	exit_status = wait_children(px.pids, cmds);
 	free(px.pids);
-	return (0);
+	return (exit_status);
 }

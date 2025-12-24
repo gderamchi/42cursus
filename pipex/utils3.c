@@ -33,16 +33,21 @@ pid_t	spawn_child(char *cmd, t_pipex *px, int is_last)
 	return (pid);
 }
 
-void	wait_children(pid_t *pids, int count)
+int	wait_children(pid_t *pids, int count)
 {
 	int	i;
+	int	status;
 
 	i = 0;
+	status = 0;
 	while (i < count)
 	{
-		waitpid(pids[i], NULL, 0);
+		waitpid(pids[i], &status, 0);
 		i++;
 	}
+	if (WIFEXITED(status))
+		return (WEXITSTATUS(status));
+	return (1);
 }
 
 void	cleanup_px(t_pipex *px)

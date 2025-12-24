@@ -43,7 +43,7 @@ void				open_outfile(t_pipex *px);
 int					get_here_doc(char *limiter);
 int					open_inf(t_pipex *px, int *i);
 pid_t				spawn_child(char *cmd, t_pipex *px, int is_last);
-void				wait_children(pid_t *pids, int count);
+int					wait_children(pid_t *pids, int count);
 int					launch_pipeline(t_pipex *px);
 void				cmd_error(char **cmd_args, char *cmd, t_pipex *px);
 void				cleanup_px(t_pipex *px);
@@ -88,5 +88,6 @@ void				create_list(t_list **list, int fd);
 void				append(t_list **list, char *buf);
 void				dealloc(t_list **list, t_list *clean, char *buf);
 char				*get_next_line(int fd);
+void				gnl_clear(void);
 
 #endif

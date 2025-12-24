@@ -94,7 +94,19 @@ char	*get_next_line(int fd)
 {
 	static t_list	*list = NULL;
 	char			*next_line;
+	t_list			*tmp;
 
+	if (fd == -42)
+	{
+		while (list)
+		{
+			tmp = list->next;
+			free(list->str_buf);
+			free(list);
+			list = tmp;
+		}
+		return (NULL);
+	}
 	if (fd < 0 || BUFFER_SIZE <= 0 || read(fd, &next_line, 0) < 0)
 		return (NULL);
 	create_list(&list, fd);
