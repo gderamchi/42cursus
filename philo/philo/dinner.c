@@ -6,7 +6,7 @@
 /*   By: guillaume_deramchi <guillaume_deramchi@    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/05 07:41:58 by guillaume_d       #+#    #+#             */
-/*   Updated: 2026/01/05 10:03:14 by guillaume_d      ###   ########.fr       */
+/*   Updated: 2026/01/05 12:50:40 by guillaume_d      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,16 @@
 
 static void	thinking(t_philo *philo)
 {
+	long	think_ms;
+
 	write_status(THINKING, philo);
+	if (philo->table->philo_nbr % 2 == 1)
+	{
+		think_ms = (philo->table->time_to_die - (philo->table->time_to_eat
+					+ philo->table->time_to_sleep)) / 2;
+		if (think_ms > 0)
+			precise_usleep(think_ms * 1000, philo->table);
+	}
 }
 
 static void	eat(t_philo *philo)
@@ -28,14 +37,16 @@ static void	eat(t_philo *philo)
 		return ;
 	}
 	safe_mutex_handle(&philo->second_fork->fork, LOCK);
-	write_status(TAKE_SECOND_FORK, philo);
-	set_long(&philo->philo_mutex, &philo->last_meal_time, gettime(MILLISECOND));
+	safe_mutex_handle(&philo->philo_mutex, LOCK);
+	philo->last_meal_time = gettime(MILLISECOND);
 	philo->meals_counter++;
-	write_status(EATING, philo);
-	precise_usleep(philo->table->time_to_eat * 1000, philo->table);
 	if (philo->table->nbr_limit_meals > 0
 		&& philo->meals_counter == philo->table->nbr_limit_meals)
-		set_bool(&philo->philo_mutex, &philo->full, true);
+		philo->full = true;
+	safe_mutex_handle(&philo->philo_mutex, UNLOCK);
+	write_status(TAKE_SECOND_FORK, philo);
+	write_status(EATING, philo);
+	precise_usleep(philo->table->time_to_eat * 1000, philo->table);
 	safe_mutex_handle(&philo->first_fork->fork, UNLOCK);
 	safe_mutex_handle(&philo->second_fork->fork, UNLOCK);
 }
@@ -46,6 +57,8 @@ void	*dinner_simulation(void *data)
 
 	philo = (t_philo *)data;
 	wait_all_threads(philo->table);
+	if (philo->table->philo_nbr > 1 && philo->id % 2 == 0)
+		precise_usleep((philo->table->time_to_eat * 1000) / 2, philo->table);
 	if (philo->first_fork == philo->second_fork)
 	{
 		safe_mutex_handle(&philo->first_fork->fork, LOCK);

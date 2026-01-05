@@ -6,7 +6,7 @@
 /*   By: guillaume_deramchi <guillaume_deramchi@    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/04 16:44:23 by guillaume_d       #+#    #+#             */
-/*   Updated: 2026/01/05 09:38:04 by guillaume_d      ###   ########.fr       */
+/*   Updated: 2026/01/05 12:50:50 by guillaume_d      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,9 @@
 
 static void	assign_forks(t_philo *philo, t_fork *forks, int philo_position)
 {
-	int	philo_nbr;
+	int		philo_nbr;
+	t_fork	*left;
+	t_fork	*right;
 
 	philo_nbr = (int)philo->table->philo_nbr;
 	if (philo_nbr == 1)
@@ -23,15 +25,17 @@ static void	assign_forks(t_philo *philo, t_fork *forks, int philo_position)
 		philo->second_fork = &forks[philo_position];
 		return ;
 	}
-	if (philo->id % 2 == 0)
+	left = &forks[philo_position];
+	right = &forks[(philo_position + 1) % philo_nbr];
+	if (left->fork_id < right->fork_id)
 	{
-		philo->first_fork = &forks[(philo_position + 1) % philo_nbr];
-		philo->second_fork = &forks[philo_position];
+		philo->first_fork = left;
+		philo->second_fork = right;
 	}
 	else
 	{
-		philo->first_fork = &forks[philo_position];
-		philo->second_fork = &forks[(philo_position + 1) % philo_nbr];
+		philo->first_fork = right;
+		philo->second_fork = left;
 	}
 }
 
